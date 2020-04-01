@@ -154,16 +154,18 @@ from random import *
 
     return minv'''
 
-def consfour(state, c):       # c는 흑백 구분 용
+def cons(state, c, num):       # c는 흑백 구분 용
+    n = num-1
+    x, y, z1, z2 = 0
     consx = 0
     consy = 0
     consz1 = 0      # 우하향
     consz2 = 0      # 좌상향
 
-    for i in range(0, 16):
-        for j in range(0, 16):
+    for i in range(0, 19-n):
+        for j in range(0, 19-n):
             if state[i][j] == c:
-                for k in range(1, 4):
+                for k in range(1, num):
                     if state[i][j+k] == c:
                         consx += 1
                     else:   # 연속이 끊겨
@@ -177,78 +179,99 @@ def consfour(state, c):       # c는 흑백 구분 용
                     else:
                         consz1 = 0
 
-                    if consx == 3:
+                    if consx == n:
                         x = 1
-                    if consy == 3:
+                    if consy == n:
                         y = 1
-                    if consz1 == 3:
+                    if consz1 == n:
                         z1 = 1
 
-    for i in range(0, 16):
-        for j in range(3, 19):
+    for i in range(0, 19-n):
+        for j in range(n, 19):
             if state[i][j] == c:
-                for k in range(1, 4):
+                for k in range(1, num):
                     if state[i+k][j+k] == c:
                         consz2 += 1
-                    if consz2 == 3:
+                    if consz2 == n:
                         z2 = 1
 
     return x, y, z1, z2
 
 
-def numofop (state, i, j, c):       # c는 나의 부호
+def numofop (state, i, j, c, consnum, ofde):       # c는 나의 부호 흑백 구분     ofde는 공격 수비 구분
     g = 0
-    x, y, z1, z2 = consfour(state, c)
+    x, y, z1, z2 = cons(state, c, consnum)
+
+    if consnum == 4 and ofde == 1:
+        v1 = 1000
+        v2 = 300
+    if consnum == 3 and ofde == 1:
+        v1 = 700
+        v2 = 100
+    if consnum == 2 and ofde == 1:
+        v1 = 50
+        v2 = 25
+
+    if consnum == 4 and ofde == -1:
+        v1 = 1000
+        v2 = 1000
+    if consnum == 3 and ofde == -1:
+        v1 = 700
+        v2 = 300
+    if consnum == 2 and ofde == -1:
+        v1 = 50
+        v2 = 25
 
     if x == 1:  # 가로
         if j - 1 >= 0 and state[i][j - 1] == 0 and state[i][j + 4] == 0 and j + 4 < 19:  # 1) 양쪽 열린 연속 4
-            g += 1000
+            g += v1
         elif j + 3 == 18 and state[i][j - 1] == 0 and i - 1 >= 0:
-            g += 300
+            g += v2
         elif j == 0 and state[i][j + 4] == 0 and j + 4 < 19:
-            g += 300
+            g += v2
         elif j - 1 >= 0 and state[i][j - 1] == -c and state[i][j + 4] == 0 and j + 4 < 19:
-            g += 300
+            g += v2
         elif j + 4 < 19 and state[i][j + 4] == -c and state[i][j - 1] == 0 and j - 1 >= 0:
-            g += 300
+            g += v2
 
     if y == 1:  # 세로
         if i - 1 >= 0 and state[i - 1][j] == 0 and state[i + 4][j] == 0 and i + 4 < 19:
-            g += 1000
+            g += v1
         elif i == 0 and state[i + 4][j] == 0 and i + 4 < 19:
-            g += 300
+            g += v2
         elif i + 3 == 18 and state[i - 1][j] == 0 and i - 1 >= 0:
-            g += 300
+            g += v2
         elif i - 1 >= 0 and state[i - 1][j] == -c and state[i + 4][j] == 0 and i + 4 < 19:
-            g += 300
+            g += v2
         elif state[i - 1][j] == 0 and state[i + 4][j] == -c and i - 1 >= 0 and i + 4 < 19:
-            g += 300
+            g += v2
 
     if z1 == 1:  # 우하향
         if i - 1 >= 0 and j - 1 >= 0 and i + 4 < 19 and j + 4 < 19 and state[i - 1][j - 1] == 0 and state[i + 4][j + 4] == 0:
-            g += 1000
+            g += v1
         elif i == 0 and j == 0 and state[i + 4][j + 4] == 0 and i + 4 < 19 and j + 4 < 19:
-            g += 300
+            g += v2
         elif i + 3 == 18 and j + 3 == 18 and state[i - 1][j - 1] == 0 and i - 1 >= 0 and j - 1 >= 0:
-            g += 300
+            g += v2
         elif state[i - 1][j - 1] == -c and state[i + 4][j + 4] == 0 and i - 1 >= 0 and j - 1 >= 0 and i + 4 < 19 and j + 4 < 19:
-            g += 300
+            g += v2
         elif state[i - 1][j - 1] == 0 and state[i + 4][j + 4] == -c and i - 1 >= 0 and j - 1 >= 0 and i + 4 < 19 and j + 4 < 19:
-            g += 300
+            g += v2
 
     if z2 == 1:  # 우상향
         if state[i + 4][j - 4] == 0 and state[i - 1][j + 1] == 0 and i + 4 < 19 and j - 4 >= 0 and i - 1 >= 0 and j + 1 < 19:
-            g += 1000
+            g += v1
         elif i == 0 and j == 18 and state[i+4][j-4] == 0 and i+4 < 19 and j-4 >= 0:
-            g += 300
+            g += v2
         elif i+3 == 18 and j-3 == 0 and state[i-1][j+1] == 0 and i-1 >= 0 and j+1 < 19:
-            g+= 300
+            g += v2
         elif state[i-1][j+1] == -c and state[i+4][j-4] == 0 and i-1 >= 0 and j+1 < 19 and i+4 < 19 and j-4 >= 0:
-            g += 300
+            g += v2
         elif state[i-1][j+1] == 0 and state[i+4][j-4] == -c and i-1 >= 0 and j+1 < 19 and i+4 < 19 and j-4 >= 0:
-            g += 300
+            g += v2
 
     return g
+
 
 def vmax(state):
     g = 0
@@ -256,26 +279,27 @@ def vmax(state):
     for i in range(0, 19):
         for j in range(0, 19):
             # 공격 - 내 돌 보고
-            numofop(state, i, j, int(-1))       # 1) 양쪽 열린 연속 4     # 4) 한쪽 열린 연속 4
+            g += numofop(state, i, j, -1, 4, 1)       # 1) 양쪽 열린 연속 4     # 4) 한쪽 열린 연속 4
+            g += numofop(state, i, j, -1, 3, 1)       # 2) 양쪽 열린 연속 3     # 5) 한쪽 열린 연속 3
 
-
-
-    # 2) 양쪽 열린 연속 3
+            if g == 0:
+                g += numofop(state, i, j, -1, 2, 1)    # 6) 1~5 해당x > 연속 2
     # 3) _oo_o_ 양쪽 열린
     #  ) _oo_o / oo_o_ 한쪽 열린
 
-    # 5) 한쪽 열린 연속 3
-    # 6) 1~5 해당x > 연속 2
 
     # 수비 - 상대 돌 보고
-    # 1) 4개 연속 / oo_oo
-    # 2) 양쪽 열린 연속 3
+            s += numofop(state, i, j, -1, 4, -1)        # 1) 4개 연속
+            s += numofop(state, i, j, -1, 4, -1)        # 2) 양쪽 열린 연속 3     # 4) 한쪽 열린 3
+
+            if s == 0:
+                s += numofop(state, i, j, -1, 2, -1)    # 6) 1~5 해당x > 연속 2
+    # / oo_oo
     # 3) _oo_o_ 양쪽 열린
     #  ) _oo_o / oo_o_ 한쪽 열린
-    # 4) 한쪽 열린 3
     # 5) oo__o 이런 형태
-    # 6) 1~5 해당x > 연속 2
 
+    maxv = g-s
     return maxv
 
 def vmin(state):
