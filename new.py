@@ -7,7 +7,7 @@ from pprint import pprint
 import sys
 import copy
 import re
-
+import time
 
 def garo(state):
     sum = 0
@@ -20,66 +20,65 @@ def garo(state):
         sum += len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) * 300000
         sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 300000
         sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 300000
-        sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000       # 완전 승리조건
+        sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
 
         sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
-        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 300
         sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
-        sum -= len(re.findall(r'[1][1][1][0][1]', panstr)) * 7000
-        sum -= len(re.findall(r'[1][1][0][1][1]', panstr)) * 7000
-        sum -= len(re.findall(r'[1][0][1][1][1]', panstr)) * 7000
-        #sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 100
-        #sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 100
-        #sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][1][0][1]', panstr)) * 1000
+        sum += len(re.findall(r'[1][1][0][1][1]', panstr)) * 1000
+        sum += len(re.findall(r'[1][0][1][1][1]', panstr)) * 1000
+        sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 100
 
-        sum += len(re.findall(r'[0][1][1][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][1][1]', panstr)) * 500
-        sum += len(re.findall(r'[1][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][1][0]', panstr)) * 200
         sum += len(re.findall(r'[1][1][1]', panstr)) * 300
-        #sum -= len(re.findall(r'[1][1][1][2]', panstr)) * 100
-        #sum -= len(re.findall(r'[2][1][1][1]', panstr)) * 100
-        #sum -= len(re.findall(r'[2][1][1][1][2]', panstr)) * 200
+        sum -= len(re.findall(r'[1][1][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][2]', panstr)) * 100
 
-        sum += len(re.findall(r'[0][1][1][0][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][0][1][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][1][0][1]', panstr)) * 500
-        sum += len(re.findall(r'[0][1][0][1][1]', panstr)) * 500
-        sum += len(re.findall(r'[1][1][0][1][0]', panstr)) * 500
-        sum += len(re.findall(r'[1][0][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][0][1][0]', panstr)) * 300
+        sum += len(re.findall(r'[0][1][0][1][1][0]', panstr)) * 300
+        sum += len(re.findall(r'[0][1][1][0][1]', panstr)) * 200
+        sum += len(re.findall(r'[0][1][0][1][1]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][0][1][0]', panstr)) * 200
+        sum += len(re.findall(r'[1][0][1][1][0]', panstr)) * 200
         sum += len(re.findall(r'[1][1][0][1]', panstr)) * 300
         sum += len(re.findall(r'[1][0][1][1]', panstr)) * 300
-        #sum -= len(re.findall(r'[2][1][1][0][1]', panstr)) * 100
-        #sum -= len(re.findall(r'[1][1][0][1][2]', panstr)) * 100
-        #sum -= len(re.findall(r'[2][1][0][1][1]', panstr)) * 100
-        #sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][1][1][0][1]', panstr)) * 50
+        sum -= len(re.findall(r'[1][1][0][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][0][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 50
 
-        sum += len(re.findall(r'[1][1]', panstr)) * 50
-        sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
-        sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
-        sum -= len(re.findall(r'[1][2]', panstr)) * 5
-        sum -= len(re.findall(r'[2][1]', panstr)) * 5
-        sum -= len(re.findall(r'[2][2]', panstr)) * 10
-
+        sum += len(re.findall(r'[1][1]', panstr)) * 5
+        #sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
+        #sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
+        sum -= len(re.findall(r'[1][2]', panstr)) * 1
+        sum -= len(re.findall(r'[2][1]', panstr)) * 1
+        sum -= len(re.findall(r'[2][2]', panstr)) * 1
 
         sum -= len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) * 150000
-        sum -= len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) * 150000   # 백의 완전 승리 조건
+        sum -= len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) * 150000  # 백의 완전 승리 조건
 
-        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000       # 흑의 수비 & 백의 공격
+        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
         sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
-        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
-        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
-        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
-        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 50
+        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 50
+        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 50
 
     return sum
 
@@ -101,43 +100,43 @@ def sero(state):        # 세로
         sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
 
         sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
-        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 300
         sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
-        sum -= len(re.findall(r'[1][1][1][0][1]', panstr)) * 7000
-        sum -= len(re.findall(r'[1][1][0][1][1]', panstr)) * 7000
-        sum -= len(re.findall(r'[1][0][1][1][1]', panstr)) * 7000
-        # sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][1][0][1]', panstr)) * 1000
+        sum += len(re.findall(r'[1][1][0][1][1]', panstr)) * 1000
+        sum += len(re.findall(r'[1][0][1][1][1]', panstr)) * 1000
+        sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 100
 
-        sum += len(re.findall(r'[0][1][1][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][1][1]', panstr)) * 500
-        sum += len(re.findall(r'[1][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][1][0]', panstr)) * 200
         sum += len(re.findall(r'[1][1][1]', panstr)) * 300
-        # sum -= len(re.findall(r'[1][1][1][2]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1][2]', panstr)) * 200
+        sum -= len(re.findall(r'[1][1][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][2]', panstr)) * 100
 
-        sum += len(re.findall(r'[0][1][1][0][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][0][1][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][1][0][1]', panstr)) * 500
-        sum += len(re.findall(r'[0][1][0][1][1]', panstr)) * 500
-        sum += len(re.findall(r'[1][1][0][1][0]', panstr)) * 500
-        sum += len(re.findall(r'[1][0][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][0][1][0]', panstr)) * 300
+        sum += len(re.findall(r'[0][1][0][1][1][0]', panstr)) * 300
+        sum += len(re.findall(r'[0][1][1][0][1]', panstr)) * 200
+        sum += len(re.findall(r'[0][1][0][1][1]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][0][1][0]', panstr)) * 200
+        sum += len(re.findall(r'[1][0][1][1][0]', panstr)) * 200
         sum += len(re.findall(r'[1][1][0][1]', panstr)) * 300
         sum += len(re.findall(r'[1][0][1][1]', panstr)) * 300
-        # sum -= len(re.findall(r'[2][1][1][0][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[1][1][0][1][2]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][0][1][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][1][1][0][1]', panstr)) * 50
+        sum -= len(re.findall(r'[1][1][0][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][0][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 50
 
-        sum += len(re.findall(r'[1][1]', panstr)) * 50
-        sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
-        sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
-        sum -= len(re.findall(r'[1][2]', panstr)) * 5
-        sum -= len(re.findall(r'[2][1]', panstr)) * 5
-        sum -= len(re.findall(r'[2][2]', panstr)) * 10
+        sum += len(re.findall(r'[1][1]', panstr)) * 5
+        # sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
+        # sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
+        sum -= len(re.findall(r'[1][2]', panstr)) * 1
+        sum -= len(re.findall(r'[2][1]', panstr)) * 1
+        sum -= len(re.findall(r'[2][2]', panstr)) * 1
 
         sum -= len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
@@ -146,17 +145,17 @@ def sero(state):        # 세로
 
         sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
         sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
-        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
-        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
-        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
-        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 50
+        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 50
+        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 50
 
     return sum
 
@@ -181,43 +180,43 @@ def daegack1(state):        # 좌하향
         sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
 
         sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
-        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 300
         sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
-        sum -= len(re.findall(r'[1][1][1][0][1]', panstr)) * 7000
-        sum -= len(re.findall(r'[1][1][0][1][1]', panstr)) * 7000
-        sum -= len(re.findall(r'[1][0][1][1][1]', panstr)) * 7000
-        # sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][1][0][1]', panstr)) * 1000
+        sum += len(re.findall(r'[1][1][0][1][1]', panstr)) * 1000
+        sum += len(re.findall(r'[1][0][1][1][1]', panstr)) * 1000
+        sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 100
 
-        sum += len(re.findall(r'[0][1][1][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][1][1]', panstr)) * 500
-        sum += len(re.findall(r'[1][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][1][0]', panstr)) * 200
         sum += len(re.findall(r'[1][1][1]', panstr)) * 300
-        # sum -= len(re.findall(r'[1][1][1][2]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1][2]', panstr)) * 200
+        sum -= len(re.findall(r'[1][1][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][2]', panstr)) * 100
 
-        sum += len(re.findall(r'[0][1][1][0][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][0][1][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][1][0][1]', panstr)) * 500
-        sum += len(re.findall(r'[0][1][0][1][1]', panstr)) * 500
-        sum += len(re.findall(r'[1][1][0][1][0]', panstr)) * 500
-        sum += len(re.findall(r'[1][0][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][0][1][0]', panstr)) * 300
+        sum += len(re.findall(r'[0][1][0][1][1][0]', panstr)) * 300
+        sum += len(re.findall(r'[0][1][1][0][1]', panstr)) * 200
+        sum += len(re.findall(r'[0][1][0][1][1]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][0][1][0]', panstr)) * 200
+        sum += len(re.findall(r'[1][0][1][1][0]', panstr)) * 200
         sum += len(re.findall(r'[1][1][0][1]', panstr)) * 300
         sum += len(re.findall(r'[1][0][1][1]', panstr)) * 300
-        # sum -= len(re.findall(r'[2][1][1][0][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[1][1][0][1][2]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][0][1][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][1][1][0][1]', panstr)) * 50
+        sum -= len(re.findall(r'[1][1][0][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][0][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 50
 
-        sum += len(re.findall(r'[1][1]', panstr)) * 50
-        sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
-        sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
-        sum -= len(re.findall(r'[1][2]', panstr)) * 5
-        sum -= len(re.findall(r'[2][1]', panstr)) * 5
-        sum -= len(re.findall(r'[2][2]', panstr)) * 10
+        sum += len(re.findall(r'[1][1]', panstr)) * 5
+        # sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
+        # sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
+        sum -= len(re.findall(r'[1][2]', panstr)) * 1
+        sum -= len(re.findall(r'[2][1]', panstr)) * 1
+        sum -= len(re.findall(r'[2][2]', panstr)) * 1
 
         sum -= len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
@@ -226,17 +225,17 @@ def daegack1(state):        # 좌하향
 
         sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
         sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
-        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
-        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
-        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
-        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 50
+        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 50
+        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 50
 
     return sum
 
@@ -261,43 +260,43 @@ def daegack2(state):        # 우하향
         sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
 
         sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
-        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 300
         sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
-        sum -= len(re.findall(r'[1][1][1][0][1]', panstr)) * 7000
-        sum -= len(re.findall(r'[1][1][0][1][1]', panstr)) * 7000
-        sum -= len(re.findall(r'[1][0][1][1][1]', panstr)) * 7000
-        # sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][1][0][1]', panstr)) * 1000
+        sum += len(re.findall(r'[1][1][0][1][1]', panstr)) * 1000
+        sum += len(re.findall(r'[1][0][1][1][1]', panstr)) * 1000
+        sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 100
 
-        sum += len(re.findall(r'[0][1][1][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][1][1]', panstr)) * 500
-        sum += len(re.findall(r'[1][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][1][0]', panstr)) * 200
         sum += len(re.findall(r'[1][1][1]', panstr)) * 300
-        # sum -= len(re.findall(r'[1][1][1][2]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][1][1][2]', panstr)) * 200
+        sum -= len(re.findall(r'[1][1][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][1][1][2]', panstr)) * 100
 
-        sum += len(re.findall(r'[0][1][1][0][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][0][1][1][0]', panstr)) * 700
-        sum += len(re.findall(r'[0][1][1][0][1]', panstr)) * 500
-        sum += len(re.findall(r'[0][1][0][1][1]', panstr)) * 500
-        sum += len(re.findall(r'[1][1][0][1][0]', panstr)) * 500
-        sum += len(re.findall(r'[1][0][1][1][0]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][0][1][0]', panstr)) * 300
+        sum += len(re.findall(r'[0][1][0][1][1][0]', panstr)) * 300
+        sum += len(re.findall(r'[0][1][1][0][1]', panstr)) * 200
+        sum += len(re.findall(r'[0][1][0][1][1]', panstr)) * 200
+        sum += len(re.findall(r'[1][1][0][1][0]', panstr)) * 200
+        sum += len(re.findall(r'[1][0][1][1][0]', panstr)) * 200
         sum += len(re.findall(r'[1][1][0][1]', panstr)) * 300
         sum += len(re.findall(r'[1][0][1][1]', panstr)) * 300
-        # sum -= len(re.findall(r'[2][1][1][0][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[1][1][0][1][2]', panstr)) * 100
-        # sum -= len(re.findall(r'[2][1][0][1][1]', panstr)) * 100
-        # sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][1][1][0][1]', panstr)) * 50
+        sum -= len(re.findall(r'[1][1][0][1][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][1][0][1][1]', panstr)) * 50
+        sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 50
 
-        sum += len(re.findall(r'[1][1]', panstr)) * 50
-        sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
-        sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
-        sum -= len(re.findall(r'[1][2]', panstr)) * 5
-        sum -= len(re.findall(r'[2][1]', panstr)) * 5
-        sum -= len(re.findall(r'[2][2]', panstr)) * 10
+        sum += len(re.findall(r'[1][1]', panstr)) * 5
+        # sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
+        # sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
+        sum -= len(re.findall(r'[1][2]', panstr)) * 1
+        sum -= len(re.findall(r'[2][1]', panstr)) * 1
+        sum -= len(re.findall(r'[2][2]', panstr)) * 1
 
         sum -= len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
@@ -306,17 +305,17 @@ def daegack2(state):        # 우하향
 
         sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
         sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
-        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
-        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
-        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
-        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 50
+        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 50
+        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 50
+        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 50
 
     return sum
 
@@ -393,17 +392,18 @@ def endgame(state):         # 장목은 승리로 보지 않음
     return 0
 
 
-def maxvalue(state, a, b, depth):
-    if depth == 0 or endgame(state) != 0:       # terminal state or cut off
-        return evaluationfunction(state), -1, -1
+def maxvalue(state, a, b, depth, end, out):
+    if depth == 0 or endgame(state) != 0 or end - time.time() <= 3:       # terminal state or cut off
+        k = evaluationfunction(state)
+        return k, 100, 100
 
     v = -sys.maxsize-1
     for i in range(0, 19):
         for j in range(0, 19):
-            if state[i][j] == 0 and samsamfunction(state, i, j, 1) != 33:  # 여기서 나중에 3*3 체크 처리 해줘야 할 듯
+            if state[i][j] == 0 and samsamfunction(state, i, j, 1) != 33:
                 state[i][j] = 1    # 현재 state에서 할 수 있는 action을 취한 결과 state (result)
 
-                minv = minvalue(state, a, b, depth - 1)
+                minv = minvalue(state, a, b, depth - 1, end, out)
                 if v <= minv[0]:
                     v = minv[0]
                     x = i
@@ -416,18 +416,18 @@ def maxvalue(state, a, b, depth):
     return v, x, y
 
 
-def minvalue(state, a, b, depth):       # min
-    if depth == 0 or endgame(state) != 0:
+def minvalue(state, a, b, depth, end, out):       # min
+    if depth == 0 or endgame(state) != 0 or end - time.time() <= 3:
         k = evaluationfunction(state)
-        return k, -1, -1
+        return k, 100, 100
 
     v = sys.maxsize
     for i in range(0, 19):
         for j in range(0, 19):
-            if state[i][j] == 0 and samsamfunction(state, i, j, 2) != 33:
+            if state[i][j] == 0 and samsamfunction(state, i, j, 2) != 33:           #삼삼 이렇게 넣어도 되는지도 더 고민해보자
                 state[i][j] = 2     # (i, j)에 바둑돌을 올리는 action
 
-                maxv = maxvalue(state, a, b, depth - 1)
+                maxv = maxvalue(state, a, b, depth - 1, end, out)
                 if v >= maxv[0]:
                     v = maxv[0]
                     x = i
@@ -440,19 +440,25 @@ def minvalue(state, a, b, depth):       # min
     return v, x, y
 
 
-def alphabeta(state, player):  # player: AI가 max player인지 min player 인지
+def alphabeta(state, player, t):  # player: AI가 max player인지 min player 인지
     depth = 2     # iterative 하게 수정해야함
-    #tem = copy.deepcopy(state)
-    v = 0
     if player == 1:  # 사용자가 흑, AI가 백 / 즉 AI가 min player
-        for i in range(0, depth):  # 여기도 수정!!!!   >> 시간 제한
-            v = minvalue(state, -sys.maxsize-1, sys.maxsize, i)      # 2의 의미: AI가 백
+        start = time.time()
+        end = start + t
+        for i in range(0, 19*19):  # 여기도 수정!!!!   >> 시간 제한
+            #print(i)
+            v = minvalue(state, -sys.maxsize-1, sys.maxsize, i, end, t)      # 2의 의미: AI가 백
+            if end -time.time() <= 3:
+                break
 
+        print(time.time()-start)
+        print(v[1], v[2])
         return v[1], v[2]
 
     if player == 2:  # 사용자가 백, AI가 흑 / 즉 AI가 max player
-        for i in range(0, depth):
-            v = maxvalue(state, -sys.maxsize-1, sys.maxsize, i)
+        start = time.time()
+        for i in range(0, 19*19):
+            v = maxvalue(state, -sys.maxsize-1, sys.maxsize, i, start+t, t)
 
         return v[1], v[2]
 
@@ -879,6 +885,7 @@ for i in range(0, 19):  # 오목판 초기화. 비어있는 상태
     pan.append(hang)  # 전체 리스트에 안쪽 리스트를 추가
 
 c = int(input("1. 흑돌\n2. 백돌\n>> "))
+t = int(input("제한 시간을 초단위로 입력해주세요\n>> "))
 print("--- Game Start !!! ---")
 
 if c == 1:  # 사용자가 흑, AI가 백
@@ -890,7 +897,8 @@ if c == 1:  # 사용자가 흑, AI가 백
             break
 
         state = copy.deepcopy(pan)          # 깊은 복사
-        x, y = alphabeta(state, c)       # alpha-beta 알고리즘 통해서 평가함수가 가장 작은 값을 가지는 위치를 알아냄
+        x, y = alphabeta(state, c, t)       # alpha-beta 알고리즘 통해서 평가함수가 가장 작은 값을 가지는 위치를 알아냄
+        print("(%d, %d)" %(x, y))
         pan[x][y] = 2                   # 알아낸 위치에 백돌 둠.
         pprint(pan)
 
@@ -916,7 +924,7 @@ if c == 2:  # 사용자가 백, AI가 흑
             break
 
         state = copy.deepcopy(pan)
-        x, y = alphabeta(state, c)
+        x, y = alphabeta(state, c, t)
         pan[x][y] = 1
         pprint(pan)
 
