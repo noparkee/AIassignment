@@ -1,6 +1,6 @@
 # 0: 비어있음
-# 1: 흑색 돌
-# 2: 백색 돌
+# 1: 흑색 돌       max player
+# 2: 백색 돌       min player
 # pan은 실제 print하는데 사용, state는 연산에 사용 pan을 그대로 연산에 사용해버리면 변하면 안 되는 위치의 값이 바뀌거나 바뀌어야 하는 위치의 값이 변하지 않음.
 
 from pprint import pprint
@@ -17,13 +17,18 @@ def garo(state):
         phang = list(map(str, phang))  # str로 바꾸기
         panstr = (''.join(phang))  # 문자열로 합치기
 
-        sum += len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) * 200000
-        sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 200000
-        sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 200000       # 완전 승리조건
+        sum += len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) * 300000
+        sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 300000
+        sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 300000
+        sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000       # 완전 승리조건
 
-        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 5000
-        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
+        sum -= len(re.findall(r'[1][1][1][0][1]', panstr)) * 7000
+        sum -= len(re.findall(r'[1][1][0][1][1]', panstr)) * 7000
+        sum -= len(re.findall(r'[1][0][1][1][1]', panstr)) * 7000
         #sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 100
         #sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 100
         #sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 200
@@ -50,10 +55,11 @@ def garo(state):
         #sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 100
 
         sum += len(re.findall(r'[1][1]', panstr)) * 50
-        sum -= len(re.findall(r'[1][1][2]', panstr)) * 10
-        sum -= len(re.findall(r'[2][1][1]', panstr)) * 10
+        sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
+        sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
         sum -= len(re.findall(r'[1][2]', panstr)) * 5
         sum -= len(re.findall(r'[2][1]', panstr)) * 5
+        sum -= len(re.findall(r'[2][2]', panstr)) * 10
 
 
         sum -= len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) * 150000
@@ -61,15 +67,13 @@ def garo(state):
         sum -= len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) * 150000   # 백의 완전 승리 조건
 
-        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 10000       # 흑의 수비 & 백의 공격
-        sum -= len(re.findall(r'[2][2][2][2][0]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2][2]', panstr)) * 5000
+        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000       # 흑의 수비 & 백의 공격
+        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
         sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 5000
         sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 5000
         sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2][0]', panstr)) * 700
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 500
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
         sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
         sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
         sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 100
@@ -91,13 +95,18 @@ def sero(state):        # 세로
         pyeol = list(map(str, pyeol))
         panstr = (''.join(pyeol))
 
-        sum += len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) * 200000
-        sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 200000
-        sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 200000  # 완전 승리조건
+        sum += len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) * 300000
+        sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 300000
+        sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 300000
+        sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
 
-        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 5000
-        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
+        sum -= len(re.findall(r'[1][1][1][0][1]', panstr)) * 7000
+        sum -= len(re.findall(r'[1][1][0][1][1]', panstr)) * 7000
+        sum -= len(re.findall(r'[1][0][1][1][1]', panstr)) * 7000
         # sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 100
         # sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 100
         # sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 200
@@ -124,25 +133,24 @@ def sero(state):        # 세로
         # sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 100
 
         sum += len(re.findall(r'[1][1]', panstr)) * 50
-        sum -= len(re.findall(r'[1][1][2]', panstr)) * 10
-        sum -= len(re.findall(r'[2][1][1]', panstr)) * 10
+        sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
+        sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
         sum -= len(re.findall(r'[1][2]', panstr)) * 5
         sum -= len(re.findall(r'[2][1]', panstr)) * 5
+        sum -= len(re.findall(r'[2][2]', panstr)) * 10
 
         sum -= len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) * 150000  # 백의 완전 승리 조건
 
-        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 10000  # 흑의 수비 & 백의 공격
-        sum -= len(re.findall(r'[2][2][2][2][0]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2][2]', panstr)) * 5000
+        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
+        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
         sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 5000
         sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 5000
         sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2][0]', panstr)) * 700
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 500
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
         sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
         sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
         sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 100
@@ -167,13 +175,18 @@ def daegack1(state):        # 좌하향
         pdaegack = list(map(str, pdaegack))
         panstr = (''.join(pdaegack))
 
-        sum += len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) * 200000
-        sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 200000
-        sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 200000  # 완전 승리조건
+        sum += len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) * 300000
+        sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 300000
+        sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 300000
+        sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
 
-        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 5000
-        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
+        sum -= len(re.findall(r'[1][1][1][0][1]', panstr)) * 7000
+        sum -= len(re.findall(r'[1][1][0][1][1]', panstr)) * 7000
+        sum -= len(re.findall(r'[1][0][1][1][1]', panstr)) * 7000
         # sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 100
         # sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 100
         # sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 200
@@ -200,25 +213,24 @@ def daegack1(state):        # 좌하향
         # sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 100
 
         sum += len(re.findall(r'[1][1]', panstr)) * 50
-        sum -= len(re.findall(r'[1][1][2]', panstr)) * 10
-        sum -= len(re.findall(r'[2][1][1]', panstr)) * 10
+        sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
+        sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
         sum -= len(re.findall(r'[1][2]', panstr)) * 5
         sum -= len(re.findall(r'[2][1]', panstr)) * 5
+        sum -= len(re.findall(r'[2][2]', panstr)) * 10
 
         sum -= len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) * 150000  # 백의 완전 승리 조건
 
-        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 10000  # 흑의 수비 & 백의 공격
-        sum -= len(re.findall(r'[2][2][2][2][0]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2][2]', panstr)) * 5000
+        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
+        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
         sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 5000
         sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 5000
         sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2][0]', panstr)) * 700
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 500
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
         sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
         sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
         sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 100
@@ -243,13 +255,18 @@ def daegack2(state):        # 우하향
         pdaegack = list(map(str, pdaegack))
         panstr = (''.join(pdaegack))
 
-        sum += len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) * 200000
-        sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 200000
-        sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 200000  # 완전 승리조건
+        sum += len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) * 300000
+        sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 300000
+        sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 300000
+        sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
 
-        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 5000
-        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
+        sum -= len(re.findall(r'[1][1][1][0][1]', panstr)) * 7000
+        sum -= len(re.findall(r'[1][1][0][1][1]', panstr)) * 7000
+        sum -= len(re.findall(r'[1][0][1][1][1]', panstr)) * 7000
         # sum -= len(re.findall(r'[1][1][1][1][2]', panstr)) * 100
         # sum -= len(re.findall(r'[2][1][1][1][1]', panstr)) * 100
         # sum -= len(re.findall(r'[2][1][1][1][1][2]', panstr)) * 200
@@ -276,25 +293,24 @@ def daegack2(state):        # 우하향
         # sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 100
 
         sum += len(re.findall(r'[1][1]', panstr)) * 50
-        sum -= len(re.findall(r'[1][1][2]', panstr)) * 10
-        sum -= len(re.findall(r'[2][1][1]', panstr)) * 10
+        sum -= len(re.findall(r'[1][1][2]', panstr)) * 5
+        sum -= len(re.findall(r'[2][1][1]', panstr)) * 5
         sum -= len(re.findall(r'[1][2]', panstr)) * 5
         sum -= len(re.findall(r'[2][1]', panstr)) * 5
+        sum -= len(re.findall(r'[2][2]', panstr)) * 10
 
         sum -= len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) * 150000  # 백의 완전 승리 조건
 
-        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 10000  # 흑의 수비 & 백의 공격
-        sum -= len(re.findall(r'[2][2][2][2][0]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2][2]', panstr)) * 5000
+        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
+        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
         sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 5000
         sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 5000
         sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 5000
-        sum -= len(re.findall(r'[0][2][2][2][0]', panstr)) * 700
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 500
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
         sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
         sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
         sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 100
@@ -384,7 +400,7 @@ def maxvalue(state, a, b, depth):
     v = -sys.maxsize-1
     for i in range(0, 19):
         for j in range(0, 19):
-            if state[i][j] == 0:  # 여기서 나중에 3*3 체크 처리 해줘야 할 듯
+            if state[i][j] == 0 and samsamfunction(state, i, j, 1) != 33:  # 여기서 나중에 3*3 체크 처리 해줘야 할 듯
                 state[i][j] = 1    # 현재 state에서 할 수 있는 action을 취한 결과 state (result)
 
                 minv = minvalue(state, a, b, depth - 1)
@@ -392,7 +408,6 @@ def maxvalue(state, a, b, depth):
                     v = minv[0]
                     x = i
                     y = j
-                #v = max(v, minvalue(state, a, b, depth - 1))
                 state[i][j] = 0
 
                 if v >= b:
@@ -401,7 +416,7 @@ def maxvalue(state, a, b, depth):
     return v, x, y
 
 
-def minvalue(state, a, b, depth):
+def minvalue(state, a, b, depth):       # min
     if depth == 0 or endgame(state) != 0:
         k = evaluationfunction(state)
         return k, -1, -1
@@ -409,15 +424,14 @@ def minvalue(state, a, b, depth):
     v = sys.maxsize
     for i in range(0, 19):
         for j in range(0, 19):
-            if state[i][j] == 0:
+            if state[i][j] == 0 and samsamfunction(state, i, j, 2) != 33:
                 state[i][j] = 2     # (i, j)에 바둑돌을 올리는 action
 
-                maxv= maxvalue(state, a, b, depth - 1)
+                maxv = maxvalue(state, a, b, depth - 1)
                 if v >= maxv[0]:
                     v = maxv[0]
                     x = i
                     y = j
-                #   v = min(v, maxvalue(state, a, b, depth - 1))
                 state[i][j] = 0
 
                 if v <= a:
@@ -426,53 +440,24 @@ def minvalue(state, a, b, depth):
     return v, x, y
 
 
-def vvaluteaction(state, v, c):     # depth 2이상 탐색하면.... 불가능
-    for i in range (0, 19):
-        for j in range(0, 19):
-            if state[i][j] == 0:
-                state[i][j] = c
-                if evaluationfunction(state) == v:
-                    return i, j
-                state[i][j] = 0
-
-
-def alpabeta(state, player):  # player: AI가 max player인지 min player 인지
+def alphabeta(state, player):  # player: AI가 max player인지 min player 인지
     depth = 2     # iterative 하게 수정해야함
-    tem = copy.deepcopy(state)
+    #tem = copy.deepcopy(state)
     v = 0
     if player == 1:  # 사용자가 흑, AI가 백 / 즉 AI가 min player
         for i in range(0, depth):  # 여기도 수정!!!!   >> 시간 제한
-            v = minvalue(state, -sys.maxsize-1, sys.maxsize, i)  # v값을 가지는 action을 취해야함. 여기도 수정
+            v = minvalue(state, -sys.maxsize-1, sys.maxsize, i)      # 2의 의미: AI가 백
 
         return v[1], v[2]
-        #x, y = vvaluteaction(tem, v, 2)
 
     if player == 2:  # 사용자가 백, AI가 흑 / 즉 AI가 max player
         for i in range(0, depth):
             v = maxvalue(state, -sys.maxsize-1, sys.maxsize, i)
 
-        #x, y = vvaluteaction(tem, v, 1)
-
         return v[1], v[2]
 
 
-def playerturn(pan, state, c):  # 사용자 차례
-    while True:
-        p = str(input(">> "))
-        x = int(p.split(' ')[0])
-        y = int(p.split(' ')[1])
-        if pan[x][y] == 0 and state[x][y] != 3:
-            if c == 1:
-                pan[x][y] = 1
-            elif c == 2:
-                pan[x][y] = 2
-        elif state[x][y] == 3:
-            print('금수 위치입니다.')
-        else:
-            print('이미 돌이 있는 곳입니다.')
-
-
-def samsamfunction(state, player):        # x하고 y는 각각 행, 열  player는 이제 수를 둘 player
+def samsamfunction(state, i, j, player):        # x하고 y는 각각 행, 열  player는 이제 수를 둘 player
     sam = 0
     samg = []
     sams = []
@@ -480,394 +465,412 @@ def samsamfunction(state, player):        # x하고 y는 각각 행, 열  player
     samdd = []
 
 
-    for i in range(0, 19):
-        for j in range(0, 19):
-            if state[i][j] == 0:
-                state[i][j] = c
 
-                # 이제 여기는 -0-00- / -00-0- 이런 꼴 넣어야하는데
-                if state[i - 1][j] == 0 and state[i][j] == c and state[i + 1][j] == 0 and state[i + 2][j] == c and \
-                        state[i + 3][j] == c and state[i + 4][j] == 0 and i - 1 >= 0 and i + 4 <= 18:
+    if state[i][j] == 0:
+        state[i][j] = c
+
+        # 이제 여기는 -0-00- / -00-0- 이런 꼴 넣어야하는데
+        if i - 1 >= 0 and i + 4 <= 18 and state[i - 1][j] == 0 and state[i][j] == c and state[i + 1][j] == 0 and state[i + 2][j] == c and \
+                state[i + 3][j] == c and state[i + 4][j] == 0:
+            sam += 1
+        if i - 1 >= 0 and i + 4 <= 18 and state[i - 1][j] == 0 and state[i][j] == c and state[i + 1][j] == c and state[i + 2][j] == 0 and \
+                state[i + 3][j] == c and state[i + 4][j] == 0:
+            sam += 1
+        if i - 2 >= 0 and i + 3 <= 18 and state[i - 2][j] == 0 and state[i - 1][j] == c and state[i][j] == c and state[i + 1][j] == 0 and \
+                state[i + 2][j] == c and state[i + 3][j] == 0:
+            sam += 1
+        if i - 3 >= 0 and i + 2 <= 18 and state[i - 3][j] == 0 and state[i - 2][j] == c and state[i - 1][j] == 0 and state[i][j] == c and \
+                state[i + 1][j] == c and state[i + 2][j] == 0:
+            sam += 1
+        if i - 4 >= 0 and i + 1 <= 18 and state[i - 4][j] == 0 and state[i - 3][j] == c and state[i - 2][j] == 0 and state[i - 1][j] == c and \
+                state[i][j] == c and state[i + 1][j] == 0:
+            sam += 1
+        if i - 4 >= 0 and i + 1 <= 18 and state[i - 4][j] == 0 and state[i - 3][j] == c and state[i - 2][j] == c and state[i - 1][j] == 0 and \
+                state[i][j] == c and state[i + 1][j] == 0:
+            sam += 1
+
+        if j - 1 >= 0 and j + 4 <= 18 and state[i][j - 1] == 0 and state[i][j] == c and state[i][j + 1] == 0 and state[i][j + 2] == c and state[i][
+            j + 3] == c and state[i][j + 4] == 0:
+            sam += 1
+        if j - 1 >= 0 and j + 4 <= 18 and state[i][j - 1] == 0 and state[i][j] == c and state[i][j + 1] == c and state[i][j + 2] == 0 and state[i][
+            j + 3] == c and state[i][j + 4] == 0:
+            sam += 1
+        if j - 2 >= 0 and j + 3 <= 18 and state[i][j - 2] == 0 and state[i][j - 1] == c and state[i][j] == c and state[i][j + 1] == 0 and state[i][
+            j + 2] == c and state[i][j + 3] == 0:
+            sam += 1
+        if j - 3 >= 0 and j + 2 <= 18 and state[i][j - 3] == 0 and state[i][j - 2] == c and state[i][j - 1] == 0 and state[i][j] == c and state[i][
+            j + 1] == c and state[i][j + 2] == 0:
+            sam += 1
+        if j - 4 >= 0 and j + 1 <= 18 and state[i][j - 4] == 0 and state[i][j - 3] == c and state[i][j - 2] == 0 and state[i][j - 1] == c and \
+                state[i][j] == c and state[i][j + 1] == 0:
+            sam += 1
+        if j - 4 >= 0 and j + 1 <= 18 and state[i][j - 4] == 0 and state[i][j - 3] == c and state[i][j - 2] == c and state[i][j - 1] == 0 and \
+                state[i][j] == c and state[i][j + 1] == 0:
+            sam += 1
+
+        if i - 1 >= 0 and i + 4 <= 18 and j-1 >= 0 and j+4 <= 18 and state[i - 1][j - 1] == 0 and state[i][j] == c and state[i + 1][j + 1] == 0 and state[i + 2][j + 1] == c and \
+                state[i + 3][j+3] == c and state[i + 4][j+4] == 0:
+            sam += 1
+        if i - 1 >= 0 and i + 4 <= 18 and j-1 >= 0 and j+4 <= 18 and state[i - 1][j-1] == 0 and state[i][j] == c and state[i + 1][j+1] == c and state[i + 2][j+2] == 0 and \
+                state[i + 3][j+3] == c and state[i + 4][j+4] == 0:
+            sam += 1
+        if i - 2 >= 0 and i + 3 <= 18 and j-2 >= 0 and j+3 <= 18 and state[i - 2][j-2] == 0 and state[i - 1][j-1] == c and state[i][j] == c and state[i + 1][j+1] == 0 and \
+                state[i + 2][j+2] == c and state[i + 3][j+3] == 0:
+            sam += 1
+        if i - 3 >= 0 and i + 2 <= 18 and j-3 >= 0 and j+2 <= 18 and state[i - 3][j-3] == 0 and state[i - 2][j-2] == c and state[i - 1][j-1] == 0 and state[i][j] == c and \
+                state[i + 1][j+1] == c and state[i + 2][j+2] == 0:
+            sam += 1
+        if i - 4 >= 0 and i + 1 <= 18 and j-4 >= 0 and j+1 <= 18 and state[i - 4][j-4] == 0 and state[i - 3][j-3] == c and state[i - 2][j-2] == 0 and state[i - 1][j-1] == c and \
+                state[i][j] == c and state[i + 1][j+1] == 0:
+            sam += 1
+        if i - 4 >= 0 and i + 1 <= 18 and j-4 >= 0 and j+1 <= 18 and state[i - 4][j-4] == 0 and state[i - 3][j-3] == c and state[i - 2][j-2] == c and state[i - 1][j-1] == 0 and \
+                state[i][j] == c and state[i + 1][j+1] == 0:
+            sam += 1
+
+        if i - 1 >= 0 and i + 4 <= 18 and j+1 <= 18 and j-4 >= 0 and state[i - 1][j + 1] == 0 and state[i][j] == c and state[i + 1][j - 1] == 0 and state[i + 2][j - 1] == c and \
+                state[i + 3][j-3] == c and state[i + 4][j-4] == 0:
+            sam += 1
+        if i - 1 >= 0 and i + 4 <= 18 and j+1 <= 18 and j-4 >= 0 and state[i - 1][j+1] == 0 and state[i][j] == c and state[i + 1][j-1] == c and state[i + 2][j-2] == 0 and \
+                state[i + 3][j-3] == c and state[i + 4][j-4] == 0:
+            sam += 1
+        if i - 2 >= 0 and i + 3 <= 18 and j+2 <= 18 and j-3 >= 0 and state[i - 2][j+2] == 0 and state[i - 1][j+1] == c and state[i][j] == c and state[i + 1][j-1] == 0 and \
+                state[i + 2][j-2] == c and state[i + 3][j-3] == 0:
+            sam += 1
+        if i - 3 >= 0 and i + 2 <= 18 and j+3 <= 18 and j-2 >= 0 and state[i - 3][j+3] == 0 and state[i - 2][j+2] == c and state[i - 1][j+1] == 0 and state[i][j] == c and \
+                state[i + 1][j-1] == c and state[i + 2][j-2] == 0:
+            sam += 1
+        if i - 4 >= 0 and i + 1 <= 18 and j+4 <= 18 and j-1 >= 0 and state[i - 4][j+4] == 0 and state[i - 3][j+3] == c and state[i - 2][j+2] == 0 and state[i - 1][j+1] == c and \
+                state[i][j] == c and state[i + 1][j-1] == 0:
+            sam += 1
+        if i - 4 >= 0 and i + 1 <= 18 and j+4 <= 18 and j-1 >= 0 and state[i - 4][j+4] == 0 and state[i - 3][j+3] == c and state[i - 2][j+2] == c and state[i - 1][j+1] == 0 and \
+                state[i][j] == c and state[i + 1][j-1] == 0 :
+            sam += 1
+
+        state[i][j] = 0     # 다시 원래대로 되돌리기
+
+        if player == 1:
+            state[i][j] = 1
+
+            for k in range(-1, 4):  # 가로 -000-- / --000-
+                if 0 <= j + k <= 18:
+                    samg.append(state[i][j + k])
+            samg = list(map(str, samg))
+            samgstr = (''.join(samg))
+            if len(re.findall(r'[0][1][1][1][0]', samgstr)) > 0:
+                if j + 4 <= 18 and state[i][j + 4] == 0:
                     sam += 1
-                if state[i - 1][j] == 0 and state[i][j] == c and state[i + 1][j] == c and state[i + 2][j] == 0 and \
-                        state[i + 3][j] == c and state[i + 4][j] == 0 and i - 1 >= 0 and i + 4 <= 18:
+                elif j - 2 >= 0 and state[i][j - 2] == 0:
                     sam += 1
-                if state[i - 2][j] == 0 and state[i - 1][j] == c and state[i][j] == c and state[i + 1][j] == 0 and \
-                        state[i + 2][j] == c and state[i + 3][j] == 0 and i - 2 >= 0 and i + 3 <= 18:
+            samg.clear()
+
+            for k in range(-2, 3):
+                if 0 <= j + k <= 18:
+                    samg.append(state[i][j + k])
+            samg = list(map(str, samg))
+            samgstr = (''.join(samg))
+            if len(re.findall(r'[0][1][1][1][0]', samgstr)) > 0:
+                if j + 3 <= 18 and state[i][j + 3] == 0:
                     sam += 1
-                if state[i - 3][j] == 0 and state[i - 2][j] == c and state[i - 1][j] == 0 and state[i][j] == c and \
-                        state[i + 1][j] == c and state[i + 2][j] == 0 and i - 3 >= 0 and i + 2 <= 18:
+                elif j - 3 >= 0 and state[i][j - 3] == 0:
                     sam += 1
-                if state[i - 4][j] == 0 and state[i - 3][j] == c and state[i - 2][j] == 0 and state[i - 1][j] == c and \
-                        state[i][j] == c and state[i + 1][j] == 0 and i - 4 >= 0 and i + 1 <= 18:
+            samg.clear()
+
+            for k in range(-3, 2):
+                if 0 <= j + k <= 18:
+                    samg.append(state[i][j + k])
+            samg = list(map(str, samg))
+            samgstr = (''.join(samg))
+            if len(re.findall(r'[0][1][1][1][0]', samgstr)) > 0:
+                if j + 2 <= 18 and state[i][j + 2] == 0:
                     sam += 1
-                if state[i - 4][j] == 0 and state[i - 3][j] == c and state[i - 2][j] == c and state[i - 1][j] == 0 and \
-                        state[i][j] == c and state[i + 1][j] == 0 and i - 4 >= 0 and i + 1 <= 18:
+                elif j - 4 >= 0 and state[i][j - 4] == 0:
                     sam += 1
+            samg.clear()
 
-                if state[i][j - 1] == 0 and state[i][j] == c and state[i][j + 1] == 0 and state[i][j + 2] == c and state[i][
-                    j + 3] == c and state[i][j + 4] == 0 and j - 1 >= 0 and j + 4 <= 18:
+            for k in range(-1, 4):  # 세로 -000-- / --000-
+                if 0 <= i + k <= 18:
+                    sams.append(state[i + k][j])
+            sams = list(map(str, sams))
+            samsstr = (''.join(sams))
+            if len(re.findall(r'[0][1][1][1][0]', samsstr)) > 0:
+                if i + 4 <= 18 and state[i + 4][j] == 0:
                     sam += 1
-                if state[i][j - 1] == 0 and state[i][j] == c and state[i][j + 1] == c and state[i][j + 2] == 0 and state[i][
-                    j + 3] == c and state[i][j + 4] == 0 and j - 1 >= 0 and j + 4 <= 18:
+                elif i - 2 >= 0 and state[i - 2][j] == 0:
                     sam += 1
-                if state[i][j - 2] == 0 and state[i][j - 1] == c and state[i][j] == c and state[i][j + 1] == 0 and state[i][
-                    j + 2] == c and state[i][j + 3] == 0 and j - 2 >= 0 and j + 3 <= 18:
+            sams.clear()
+
+            for k in range(-2, 3):
+                if 0 <= i + k <= 18:
+                    sams.append(state[i + k][j])
+            sams = list(map(str, sams))
+            samsstr = (''.join(sams))
+            if len(re.findall(r'[0][1][1][1][0]', samsstr)) > 0:
+                if i + 3 <= 18 and state[i + 3][j] == 0:
                     sam += 1
-                if state[i][j - 3] == 0 and state[i][j - 2] == c and state[i][j - 1] == 0 and state[i][j] == c and state[i][
-                    j + 1] == c and state[i][j + 2] == 0 and j - 3 >= 0 and j + 2 <= 18:
+                elif i - 3 >= 0 and state[i - 3][j] == 0:
                     sam += 1
-                if state[i][j - 4] == 0 and state[i][j - 3] == c and state[i][j - 2] == 0 and state[i][j - 1] == c and \
-                        state[i][j] == c and state[i][j + 1] == 0 and j - 4 >= 0 and j + 1 <= 18:
+            sams.clear()
+
+            for k in range(-3, 2):
+                if 0 <= i + k <= 18:
+                    sams.append(state[i + k][j])
+            sams = list(map(str, sams))
+            samsstr = (''.join(sams))
+            if len(re.findall(r'[0][1][1][1][0]', samsstr)) > 0:
+                if i + 2 <= 18 and state[i + 2][j] == 0:
                     sam += 1
-                if state[i][j - 4] == 0 and state[i][j - 3] == c and state[i][j - 2] == c and state[i][j - 1] == 0 and \
-                        state[i][j] == c and state[i][j + 1] == 0 and j - 4 >= 0 and j + 1 <= 18:
+                elif i - 4 >= 0 and state[i - 4][j] == 0:
                     sam += 1
+            sams.clear()
 
-                if state[i - 1][j - 1] == 0 and state[i][j] == c and state[i + 1][j + 1] == 0 and state[i + 2][j + 1] == c and \
-                        state[i + 3][j+3] == c and state[i + 4][j+4] == 0 and i - 1 >= 0 and i + 4 <= 18 and j-1 >= 0 and j+4 <= 18:
+            for k in range(-1, 4):  # 대각 좌하향 -000-- / --000-
+                if 0 <= i + k <= 18 and 0 <= j - k <= 18:
+                    samd.append(state[i + k][j - k])
+            samd = list(map(str, samd))
+            samdstr = (''.join(samd))
+            if len(re.findall(r'[0][1][1][1][0]', samdstr)) > 0:
+                if i + 4 <= 18 and j - 4 >= 0 and state[i + 4][j - 4] == 0:
                     sam += 1
-                if state[i - 1][j-1] == 0 and state[i][j] == c and state[i + 1][j+1] == c and state[i + 2][j+2] == 0 and \
-                        state[i + 3][j+3] == c and state[i + 4][j+4] == 0 and i - 1 >= 0 and i + 4 <= 18 and j-1 >= 0 and j+4 <= 18:
+                elif i - 2 >= 0 and j + 2 <= 18 and state[i - 2][j + 2] == 0:
                     sam += 1
-                if state[i - 2][j-2] == 0 and state[i - 1][j-1] == c and state[i][j] == c and state[i + 1][j+1] == 0 and \
-                        state[i + 2][j+2] == c and state[i + 3][j+3] == 0 and i - 2 >= 0 and i + 3 <= 18 and j-2 >= 0 and j+3 <= 18:
+            samd.clear()
+
+            for k in range(-2, 3):
+                if 0 <= i + k <= 18 and 0 <= j - k <= 18:
+                    samd.append(state[i + k][j - k])
+            samd = list(map(str, samd))
+            samdstr = (''.join(samd))
+            if len(re.findall(r'[0][1][1][1][0]', samdstr)) > 0:
+                if i + 3 <= 18 and j - 3 >= 0 and state[i + 3][j - 3] == 0:
                     sam += 1
-                if state[i - 3][j-3] == 0 and state[i - 2][j-2] == c and state[i - 1][j-1] == 0 and state[i][j] == c and \
-                        state[i + 1][j+1] == c and state[i + 2][j+2] == 0 and i - 3 >= 0 and i + 2 <= 18 and j-3 >= 0 and j+2 <= 18:
+                elif i - 3 >= 0 and j + 3 <= 18 and state[i - 3][j + 3] == 0:
                     sam += 1
-                if state[i - 4][j-4] == 0 and state[i - 3][j-3] == c and state[i - 2][j-2] == 0 and state[i - 1][j-1] == c and \
-                        state[i][j] == c and state[i + 1][j+1] == 0 and i - 4 >= 0 and i + 1 <= 18 and j-4 >= 0 and j+1 <= 18:
+            samd.clear()
+
+            for k in range(-3, 2):
+                if 0 <= i + k <= 18 and 0 <= j - k <= 18:
+                    samd.append(state[i + k][j - k])
+            samd = list(map(str, samd))
+            samdstr = (''.join(samd))
+            if len(re.findall(r'[0][1][1][1][0]', samdstr)) > 0:
+                if i + 2 <= 18 and j - 2 >= 0 and state[i + 2][j - 2] == 0:
                     sam += 1
-                if state[i - 4][j-4] == 0 and state[i - 3][j-3] == c and state[i - 2][j-2] == c and state[i - 1][j-1] == 0 and \
-                        state[i][j] == c and state[i + 1][j+1] == 0 and i - 4 >= 0 and i + 1 <= 18 and j-4 >= 0 and j+1 <= 18:
+                elif i - 4 >= 0 and j + 4 <= 18 and state[i - 4][j + 4] == 0:
                     sam += 1
+            samd.clear()
 
-                if state[i - 1][j + 1] == 0 and state[i][j] == c and state[i + 1][j - 1] == 0 and state[i + 2][j - 1] == c and \
-                        state[i + 3][j-3] == c and state[i + 4][j-4] == 0 and i - 1 >= 0 and i + 4 <= 18 and j+1 <= 18 and j-4 >= 0:
+            for k in range(-1, 4):  # 대각 우하향 -000-- / --000-
+                if 0 <= i + k <= 18 and 0 <= j + k <= 18:
+                    samdd.append(state[i + k][j + k])
+            samdd = list(map(str, samdd))
+            samddstr = (''.join(samdd))
+            if len(re.findall(r'[0][1][1][1][0]', samddstr)) > 0:
+                if i + 4 <= 18 and j + 4 >= 0 and state[i + 4][j + 4] == 0:
                     sam += 1
-                if state[i - 1][j+1] == 0 and state[i][j] == c and state[i + 1][j-1] == c and state[i + 2][j-2] == 0 and \
-                        state[i + 3][j-3] == c and state[i + 4][j-4] == 0 and i - 1 >= 0 and i + 4 <= 18 and j+1 <= 18 and j-4 >= 0:
+                elif i - 2 >= 0 and j - 2 <= 18 and state[i - 2][j - 2] == 0:
                     sam += 1
-                if state[i - 2][j+2] == 0 and state[i - 1][j+1] == c and state[i][j] == c and state[i + 1][j-1] == 0 and \
-                        state[i + 2][j-2] == c and state[i + 3][j-3] == 0 and i - 2 >= 0 and i + 3 <= 18 and j+2 <= 18 and j-3 >= 0:
+            samdd.clear()
+
+            for k in range(-2, 3):
+                if 0 <= i + k <= 18 and 0 <= j + k <= 18:
+                    samdd.append(state[i + k][j + k])
+            samdd = list(map(str, samdd))
+            samddstr = (''.join(samdd))
+            if len(re.findall(r'[0][1][1][1][0]', samddstr)) > 0:
+                if i + 3 <= 18 and j + 3 >= 0 and state[i + 3][j + 3] == 0:
                     sam += 1
-                if state[i - 3][j+3] == 0 and state[i - 2][j+2] == c and state[i - 1][j+1] == 0 and state[i][j] == c and \
-                        state[i + 1][j-1] == c and state[i + 2][j-2] == 0 and i - 3 >= 0 and i + 2 <= 18 and j+3 <= 18 and j-2 >= 0:
+                elif i - 3 >= 0 and j - 3 <= 18 and state[i - 3][j - 3] == 0:
                     sam += 1
-                if state[i - 4][j+4] == 0 and state[i - 3][j+3] == c and state[i - 2][j+2] == 0 and state[i - 1][j+1] == c and \
-                        state[i][j] == c and state[i + 1][j-1] == 0 and i - 4 >= 0 and i + 1 <= 18 and j+4 <= 18 and j-1 >= 0:
+            samdd.clear()
+
+            for k in range(-3, 2):
+                if 0 <= i + k <= 18 and 0 <= j + k <= 18:
+                    samdd.append(state[i + k][j + k])
+            samdd = list(map(str, samdd))
+            samddstr = (''.join(samdd))
+            if len(re.findall(r'[0][1][1][1][0]', samddstr)) > 0:
+                if i + 2 <= 18 and j + 2 >= 0 and state[i + 2][j + 2] == 0:
                     sam += 1
-                if state[i - 4][j+4] == 0 and state[i - 3][j+3] == c and state[i - 2][j+2] == c and state[i - 1][j+1] == 0 and \
-                        state[i][j] == c and state[i + 1][j-1] == 0 and i - 4 >= 0 and i + 1 <= 18 and j+4 <= 18 and j-1 >= 0:
+                elif i - 4 >= 0 and j - 4 <= 18 and state[i - 4][j - 4] == 0:
                     sam += 1
+            samdd.clear()
 
-                state[i][j] = 0     # 다시 원래대로 되돌리기
+            state[i][j] = 0
 
-                if player == 1:
-                    state[i][j] = 1
+        if player == 2:
+            state[i][j] = 2
 
-                    for k in range(-1, 4):  # 가로 -000-- / --000-
-                        if 0 <= j + k <= 18:
-                            samg.append(state[i][j + k])
-                    samg = list(map(str, samg))
-                    samgstr = (''.join(samg))
-                    if re.findall(r'[0][1][1][1][0]', samgstr) > 0:
-                        if j + 4 <= 18 and state[i][j + 4] == 0:
-                            sam += 1
-                        elif j - 2 >= 0 and state[i][j - 2] == 0:
-                            sam += 1
-                    samg.clear()
+            for k in range(-1, 4):      # 가로 -000-- / --000-
+                if 0 <= j+k <= 18:
+                    samg.append(state[i][j+k])
+            samg = list(map(str, samg))
+            samgstr = (''.join(samg))
+            if len(re.findall(r'[0][2][2][2][0]', samgstr)) > 0:
+                if j+4 <= 18 and state[i][j+4] == 0:
+                    sam += 1
+                elif j-2 >=0 and state[i][j-2] == 0:
+                    sam += 1
+            samg.clear()
 
-                    for k in range(-2, 3):
-                        if 0 <= j + k <= 18:
-                            samg.append(state[i][j + k])
-                    samg = list(map(str, samg))
-                    samgstr = (''.join(samg))
-                    if re.findall(r'[0][1][1][1][0]', samgstr) > 0:
-                        if j + 3 <= 18 and state[i][j + 3] == 0:
-                            sam += 1
-                        elif j - 3 >= 0 and state[i][j - 3] == 0:
-                            sam += 1
-                    samg.clear()
+            for k in range(-2, 3):
+                if 0 <= j+k <= 18:
+                    samg.append(state[i][j+k])
+            samg = list(map(str, samg))
+            samgstr = (''.join(samg))
+            if len(re.findall(r'[0][2][2][2][0]', samgstr)) > 0:
+                if j+3 <= 18 and state[i][j+3] == 0:
+                    sam += 1
+                elif j-3 >=0 and state[i][j-3] == 0:
+                    sam += 1
+            samg.clear()
 
-                    for k in range(-3, 2):
-                        if 0 <= j + k <= 18:
-                            samg.append(state[i][j + k])
-                    samg = list(map(str, samg))
-                    samgstr = (''.join(samg))
-                    if re.findall(r'[0][1][1][1][0]', samgstr) > 0:
-                        if j + 2 <= 18 and state[i][j + 2] == 0:
-                            sam += 1
-                        elif j - 4 >= 0 and state[i][j - 4] == 0:
-                            sam += 1
-                    samg.clear()
+            for k in range(-3, 2):
+                if 0 <= j+k <= 18:
+                    samg.append(state[i][j+k])
+            samg = list(map(str, samg))
+            samgstr = (''.join(samg))
+            if len(re.findall(r'[0][2][2][2][0]', samgstr)) > 0:
+                if j+2 <= 18 and state[i][j+2] == 0:
+                    sam += 1
+                elif j-4 >= 0 and state[i][j-4] == 0:
+                    sam += 1
+            samg.clear()
 
-                    for k in range(-1, 4):  # 세로 -000-- / --000-
-                        if 0 <= i + k <= 18:
-                            sams.append(state[i + k][j])
-                    sams = list(map(str, sams))
-                    samsstr = (''.join(sams))
-                    if re.findall(r'[0][1][1][1][0]', samsstr) > 0:
-                        if i + 4 <= 18 and state[i + 4][j] == 0:
-                            sam += 1
-                        elif i - 2 >= 0 and state[i - 2][j] == 0:
-                            sam += 1
-                    sams.clear()
+            for k in range(-1, 4):      # 세로 -000-- / --000-
+                if 0 <= i+k <= 18:
+                    sams.append(state[i+k][j])
+            sams = list(map(str, sams))
+            samsstr = (''.join(sams))
+            if len(re.findall(r'[0][2][2][2][0]', samsstr)) > 0:
+                if i+4 <= 18 and state[i+4][j] == 0:
+                    sam += 1
+                elif i-2 >=0 and state[i-2][j] == 0:
+                    sam += 1
+            sams.clear()
 
-                    for k in range(-2, 3):
-                        if 0 <= i + k <= 18:
-                            sams.append(state[i + k][j])
-                    sams = list(map(str, sams))
-                    samsstr = (''.join(sams))
-                    if re.findall(r'[0][1][1][1][0]', samsstr) > 0:
-                        if i + 3 <= 18 and state[i + 3][j] == 0:
-                            sam += 1
-                        elif i - 3 >= 0 and state[i - 3][j] == 0:
-                            sam += 1
-                    sams.clear()
+            for k in range(-2, 3):
+                if 0 <= i+k <= 18:
+                    sams.append(state[i+k][j])
+            sams = list(map(str, sams))
+            samsstr = (''.join(sams))
+            if len(re.findall(r'[0][2][2][2][0]', samsstr)) > 0:
+                if i+3 <= 18 and state[i+3][j] == 0:
+                    sam += 1
+                elif i-3 >=0 and state[i-3][j] == 0:
+                    sam += 1
+            sams.clear()
 
-                    for k in range(-3, 2):
-                        if 0 <= i + k <= 18:
-                            sams.append(state[i + k][j])
-                    sams = list(map(str, sams))
-                    samsstr = (''.join(sams))
-                    if re.findall(r'[0][1][1][1][0]', samsstr) > 0:
-                        if i + 2 <= 18 and state[i + 2][j] == 0:
-                            sam += 1
-                        elif i - 4 >= 0 and state[i - 4][j] == 0:
-                            sam += 1
-                    sams.clear()
+            for k in range(-3, 2):
+                if 0 <= i+k <= 18:
+                    sams.append(state[i+k][j])
+            sams = list(map(str, sams))
+            samsstr = (''.join(sams))
+            if len(re.findall(r'[0][2][2][2][0]', samsstr)) > 0:
+                if i+2 <= 18 and state[i+2][j] == 0:
+                    sam += 1
+                elif i-4 >= 0 and state[i-4][j] == 0:
+                    sam += 1
+            sams.clear()
 
-                    for k in range(-1, 4):  # 대각 좌하향 -000-- / --000-
-                        if 0 <= i + k <= 18 and 0 <= j - k <= 18:
-                            samd.append(state[i + k][j - k])
-                    samd = list(map(str, samd))
-                    samdstr = (''.join(samd))
-                    if re.findall(r'[0][1][1][1][0]', samdstr) > 0:
-                        if i + 4 <= 18 and j - 4 >= 0 and state[i + 4][j - 4] == 0:
-                            sam += 1
-                        elif i - 2 >= 0 and j + 2 <= 18 and state[i - 2][j + 2] == 0:
-                            sam += 1
-                    samd.clear()
+            for k in range(-1, 4):      # 대각 좌하향 -000-- / --000-
+                if 0 <= i+k <= 18 and 0<= j-k <= 18:
+                    samd.append(state[i+k][j-k])
+            samd = list(map(str, samd))
+            samdstr = (''.join(samd))
+            if len(re.findall(r'[0][2][2][2][0]', samdstr)) > 0:
+                if i+4 <= 18 and j-4 >= 0 and state[i+4][j-4] == 0:
+                    sam += 1
+                elif i-2 >= 0 and j + 2 <= 18 and state[i-2][j+2] == 0:
+                    sam += 1
+            samd.clear()
 
-                    for k in range(-2, 3):
-                        if 0 <= i + k <= 18 and 0 <= j - k <= 18:
-                            samd.append(state[i + k][j - k])
-                    samd = list(map(str, samd))
-                    samdstr = (''.join(samd))
-                    if re.findall(r'[0][1][1][1][0]', samdstr) > 0:
-                        if i + 3 <= 18 and j - 3 >= 0 and state[i + 3][j - 3] == 0:
-                            sam += 1
-                        elif i - 3 >= 0 and j + 3 <= 18 and state[i - 3][j + 3] == 0:
-                            sam += 1
-                    samd.clear()
+            for k in range(-2, 3):
+                if 0 <= i+k <= 18 and 0 <= j-k <= 18:
+                    samd.append(state[i+k][j-k])
+            samd = list(map(str, samd))
+            samdstr = (''.join(samd))
+            if len(re.findall(r'[0][2][2][2][0]', samdstr)) > 0:
+                if i+3 <= 18 and j-3 >=0 and state[i+3][j-3] == 0:
+                    sam += 1
+                elif i-3 >=0 and j+3 <= 18 and state[i-3][j+3] == 0:
+                    sam += 1
+            samd.clear()
 
-                    for k in range(-3, 2):
-                        if 0 <= i + k <= 18 and 0 <= j - k <= 18:
-                            samd.append(state[i + k][j - k])
-                    samd = list(map(str, samd))
-                    samdstr = (''.join(samd))
-                    if re.findall(r'[0][1][1][1][0]', samdstr) > 0:
-                        if i + 2 <= 18 and j - 2 >= 0 and state[i + 2][j - 2] == 0:
-                            sam += 1
-                        elif i - 4 >= 0 and j + 4 <= 18 and state[i - 4][j + 4] == 0:
-                            sam += 1
-                    samd.clear()
+            for k in range(-3, 2):
+                if 0 <= i+k <= 18 and 0 <= j-k <= 18:
+                    samd.append(state[i+k][j-k])
+            samd = list(map(str, samd))
+            samdstr = (''.join(samd))
+            if len(re.findall(r'[0][2][2][2][0]', samdstr)) > 0:
+                if i+2 <= 18 and j-2 >= 0 and state[i+2][j-2] == 0:
+                    sam += 1
+                elif i-4 >= 0 and j+4 <= 18 and state[i-4][j+4] == 0:
+                    sam += 1
+            samd.clear()
 
-                    for k in range(-1, 4):  # 대각 우하향 -000-- / --000-
-                        if 0 <= i + k <= 18 and 0 <= j + k <= 18:
-                            samdd.append(state[i + k][j + k])
-                    samdd = list(map(str, samdd))
-                    samddstr = (''.join(samdd))
-                    if re.findall(r'[0][1][1][1][0]', samddstr) > 0:
-                        if i + 4 <= 18 and j + 4 >= 0 and state[i + 4][j + 4] == 0:
-                            sam += 1
-                        elif i - 2 >= 0 and j - 2 <= 18 and state[i - 2][j - 2] == 0:
-                            sam += 1
-                    samdd.clear()
+            for k in range(-1, 4):      # 대각 우하향 -000-- / --000-
+                if 0 <= i+k <= 18 and 0 <= j+k <= 18:
+                    samdd.append(state[i+k][j+k])
+            samdd = list(map(str, samdd))
+            samddstr = (''.join(samdd))
+            if len(re.findall(r'[0][2][2][2][0]', samddstr)) > 0:
+                if i+4 <= 18 and j+4 >= 0 and state[i+4][j+4] == 0:
+                    sam += 1
+                elif i-2 >= 0 and j - 2 <= 18 and state[i-2][j-2] == 0:
+                    sam += 1
+            samdd.clear()
 
-                    for k in range(-2, 3):
-                        if 0 <= i + k <= 18 and 0 <= j + k <= 18:
-                            samdd.append(state[i + k][j + k])
-                    samdd = list(map(str, samdd))
-                    samddstr = (''.join(samdd))
-                    if re.findall(r'[0][1][1][1][0]', samddstr) > 0:
-                        if i + 3 <= 18 and j + 3 >= 0 and state[i + 3][j + 3] == 0:
-                            sam += 1
-                        elif i - 3 >= 0 and j - 3 <= 18 and state[i - 3][j - 3] == 0:
-                            sam += 1
-                    samdd.clear()
+            for k in range(-2, 3):
+                if 0 <= i+k <= 18 and 0 <= j+k <= 18:
+                    samdd.append(state[i+k][j+k])
+            samdd = list(map(str, samdd))
+            samddstr = (''.join(samdd))
+            if len(re.findall(r'[0][2][2][2][0]', samddstr)) > 0:
+                if i+3 <= 18 and j+3 >=0 and state[i+3][j+3] == 0:
+                    sam += 1
+                elif i-3 >=0 and j-3 <= 18 and state[i-3][j-3] == 0:
+                    sam += 1
+            samdd.clear()
 
-                    for k in range(-3, 2):
-                        if 0 <= i + k <= 18 and 0 <= j + k <= 18:
-                            samdd.append(state[i + k][j + k])
-                    samdd = list(map(str, samdd))
-                    samddstr = (''.join(samdd))
-                    if re.findall(r'[0][1][1][1][0]', samddstr) > 0:
-                        if i + 2 <= 18 and j + 2 >= 0 and state[i + 2][j + 2] == 0:
-                            sam += 1
-                        elif i - 4 >= 0 and j - 4 <= 18 and state[i - 4][j - 4] == 0:
-                            sam += 1
-                    samdd.clear()
+            for k in range(-3, 2):
+                if 0 <= i+k <= 18 and 0 <= j+k <= 18:
+                    samdd.append(state[i+k][j+k])
+            samdd = list(map(str, samdd))
+            samddstr = (''.join(samdd))
+            if len(re.findall(r'[0][2][2][2][0]', samddstr)) > 0:
+                if i+2 <= 18 and j+2 >= 0 and state[i+2][j+2] == 0:
+                    sam += 1
+                elif i-4 >= 0 and j-4 <= 18 and state[i-4][j-4] == 0:
+                    sam += 1
+            samdd.clear()
 
-                    state[i][j] = 0
+            state[i][j] = 0     # 원래대로
 
-                if player == 2:
-                    state[i][j] = 2
-
-                    for k in range(-1, 4):      # 가로 -000-- / --000-
-                        if 0 <= j+k <= 18:
-                            samg.append(state[i][j+k])
-                    samg = list(map(str, samg))
-                    samgstr = (''.join(samg))
-                    if re.findall(r'[0][2][2][2][0]', samgstr) > 0:
-                        if j+4 <= 18 and state[i][j+4] == 0:
-                            sam += 1
-                        elif j-2 >=0 and state[i][j-2] == 0:
-                            sam += 1
-                    samg.clear()
-
-                    for k in range(-2, 3):
-                        if 0 <= j+k <= 18:
-                            samg.append(state[i][j+k])
-                    samg = list(map(str, samg))
-                    samgstr = (''.join(samg))
-                    if re.findall(r'[0][2][2][2][0]', samgstr) > 0:
-                        if j+3 <= 18 and state[i][j+3] == 0:
-                            sam += 1
-                        elif j-3 >=0 and state[i][j-3] == 0:
-                            sam += 1
-                    samg.clear()
-
-                    for k in range(-3, 2):
-                        if 0 <= j+k <= 18:
-                            samg.append(state[i][j+k])
-                    samg = list(map(str, samg))
-                    samgstr = (''.join(samg))
-                    if re.findall(r'[0][2][2][2][0]', samgstr) > 0:
-                        if j+2 <= 18 and state[i][j+2] == 0:
-                            sam += 1
-                        elif j-4 >= 0 and state[i][j-4] == 0:
-                            sam += 1
-                    samg.clear()
-
-                    for k in range(-1, 4):      # 세로 -000-- / --000-
-                        if 0 <= i+k <= 18:
-                            sams.append(state[i+k][j])
-                    sams = list(map(str, sams))
-                    samsstr = (''.join(sams))
-                    if re.findall(r'[0][2][2][2][0]', samsstr) > 0:
-                        if i+4 <= 18 and state[i+4][j] == 0:
-                            sam += 1
-                        elif i-2 >=0 and state[i-2][j] == 0:
-                            sam += 1
-                    sams.clear()
-
-                    for k in range(-2, 3):
-                        if 0 <= i+k <= 18:
-                            sams.append(state[i+k][j])
-                    sams = list(map(str, sams))
-                    samsstr = (''.join(sams))
-                    if re.findall(r'[0][2][2][2][0]', samsstr) > 0:
-                        if i+3 <= 18 and state[i+3][j] == 0:
-                            sam += 1
-                        elif i-3 >=0 and state[i-3][j] == 0:
-                            sam += 1
-                    sams.clear()
-
-                    for k in range(-3, 2):
-                        if 0 <= i+k <= 18:
-                            sams.append(state[i+k][j])
-                    sams = list(map(str, sams))
-                    samsstr = (''.join(sams))
-                    if re.findall(r'[0][2][2][2][0]', samsstr) > 0:
-                        if i+2 <= 18 and state[i+2][j] == 0:
-                            sam += 1
-                        elif i-4 >= 0 and state[i-4][j] == 0:
-                            sam += 1
-                    sams.clear()
-
-                    for k in range(-1, 4):      # 대각 좌하향 -000-- / --000-
-                        if 0 <= i+k <= 18 and 0<= j-k <= 18:
-                            samd.append(state[i+k][j-k])
-                    samd = list(map(str, samd))
-                    samdstr = (''.join(samd))
-                    if re.findall(r'[0][2][2][2][0]', samdstr) > 0:
-                        if i+4 <= 18 and j-4 >= 0 and state[i+4][j-4] == 0:
-                            sam += 1
-                        elif i-2 >= 0 and j + 2 <= 18 and state[i-2][j+2] == 0:
-                            sam += 1
-                    samd.clear()
-
-                    for k in range(-2, 3):
-                        if 0 <= i+k <= 18 and 0 <= j-k <= 18:
-                            samd.append(state[i+k][j-k])
-                    samd = list(map(str, samd))
-                    samdstr = (''.join(samd))
-                    if re.findall(r'[0][2][2][2][0]', samdstr) > 0:
-                        if i+3 <= 18 and j-3 >=0 and state[i+3][j-3] == 0:
-                            sam += 1
-                        elif i-3 >=0 and j+3 <= 18 and state[i-3][j+3] == 0:
-                            sam += 1
-                    samd.clear()
-
-                    for k in range(-3, 2):
-                        if 0 <= i+k <= 18 and 0 <= j-k <= 18:
-                            samd.append(state[i+k][j-k])
-                    samd = list(map(str, samd))
-                    samdstr = (''.join(samd))
-                    if re.findall(r'[0][2][2][2][0]', samdstr) > 0:
-                        if i+2 <= 18 and j-2 >= 0 and state[i+2][j-2] == 0:
-                            sam += 1
-                        elif i-4 >= 0 and j+4 <= 18 and state[i-4][j+4] == 0:
-                            sam += 1
-                    samd.clear()
-
-                    for k in range(-1, 4):      # 대각 우하향 -000-- / --000-
-                        if 0 <= i+k <= 18 and 0 <= j+k <= 18:
-                            samdd.append(state[i+k][j+k])
-                    samdd = list(map(str, samdd))
-                    samddstr = (''.join(samdd))
-                    if re.findall(r'[0][2][2][2][0]', samddstr) > 0:
-                        if i+4 <= 18 and j+4 >= 0 and state[i+4][j+4] == 0:
-                            sam += 1
-                        elif i-2 >= 0 and j - 2 <= 18 and state[i-2][j-2] == 0:
-                            sam += 1
-                    samdd.clear()
-
-                    for k in range(-2, 3):
-                        if 0 <= i+k <= 18 and 0 <= j+k <= 18:
-                            samdd.append(state[i+k][j+k])
-                    samdd = list(map(str, samdd))
-                    samddstr = (''.join(samdd))
-                    if re.findall(r'[0][2][2][2][0]', samddstr) > 0:
-                        if i+3 <= 18 and j+3 >=0 and state[i+3][j+3] == 0:
-                            sam += 1
-                        elif i-3 >=0 and j-3 <= 18 and state[i-3][j-3] == 0:
-                            sam += 1
-                    samdd.clear()
-
-                    for k in range(-3, 2):
-                        if 0 <= i+k <= 18 and 0 <= j+k <= 18:
-                            samdd.append(state[i+k][j+k])
-                    samdd = list(map(str, samdd))
-                    samddstr = (''.join(samdd))
-                    if re.findall(r'[0][2][2][2][0]', samddstr) > 0:
-                        if i+2 <= 18 and j+2 >= 0 and state[i+2][j+2] == 0:
-                            sam += 1
-                        elif i-4 >= 0 and j-4 <= 18 and state[i-4][j-4] == 0:
-                            sam += 1
-                    samdd.clear()
-
-                    state[i][j] = 0
-
-                if sam >= 2:
-                    state[i][j] = 3
+        if sam >= 2:
+            #state[i][j] = 3
+            return 33
+    return 0
 
 
+def playerturn(pan, c):  # 사용자 차례
+    while True:
+        p = str(input(">> "))
+        x = int(p.split(' ')[0])
+        y = int(p.split(' ')[1])
+        if pan[x][y] == 0 and samsamfunction(pan, x, y, c) != 33:
+            if c == 1:
+                pan[x][y] = 1
+                break
+            elif c == 2:
+                pan[x][y] = 2
+                break
+        elif samsamfunction(pan, x, y, c) == 33:
+                print('금수 위치입니다.')
+        else:
+            print('이미 돌이 있는 곳입니다.')
 
-pan = []
+
+pan = []        # 전역변수
 
 for i in range(0, 19):  # 오목판 초기화. 비어있는 상태
     hang = []  # 행
@@ -880,18 +883,14 @@ print("--- Game Start !!! ---")
 
 if c == 1:  # 사용자가 흑, AI가 백
     while True:
-        state = copy.deepcopy(pan)
-        samsamfunction(state, 1)
-        playerturn(pan, state, c)
+        playerturn(pan, c)       # 사용자가 두기
         pprint(pan)
 
         if endgame(pan) != 0:
             break
 
         state = copy.deepcopy(pan)          # 깊은 복사
-        samsamfunction(state, 2)        # 여기에서 state에서 3수인 위치를 표시해서 알파베타에게 넘겨줘야 함.
-
-        x, y = alpabeta(state, c)       # alpa-beta 알고리즘 통해서 평가함수가 가장 작은 값을 가지는 위치를 알아냄
+        x, y = alphabeta(state, c)       # alpha-beta 알고리즘 통해서 평가함수가 가장 작은 값을 가지는 위치를 알아냄
         pan[x][y] = 2                   # 알아낸 위치에 백돌 둠.
         pprint(pan)
 
@@ -910,7 +909,6 @@ if c == 2:  # 사용자가 백, AI가 흑
 
     while True:
         state = copy.deepcopy(pan)
-        samsamfunction(state, 2)
         playerturn(pan, c)
         pprint(pan)
 
@@ -918,14 +916,13 @@ if c == 2:  # 사용자가 백, AI가 흑
             break
 
         state = copy.deepcopy(pan)
-        samsamfunction(state, 1)
-
-        x, y = alpabeta(state, c)
+        x, y = alphabeta(state, c)
         pan[x][y] = 1
         pprint(pan)
 
         if endgame(pan) != 0:
             break
+
     if endgame(pan) == 2:
         print("백의 승리")
     elif endgame(pan) == 1:
