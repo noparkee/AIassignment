@@ -22,6 +22,10 @@ def garo(state):
         sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 300000
         sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 300000
         sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
+        sum += len(re.findall(r'[0][1][1][1][1][1]', panstr)) * 150000
+        sum += len(re.findall(r'[1][1][1][1][1][0]', panstr)) * 150000
+        sum += len(re.findall(r'[2][1][1][1][1][1]', panstr)) * 150000
+        sum += len(re.findall(r'[1][1][1][1][1][2]', panstr)) * 150000
 
         sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
         sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
@@ -56,6 +60,8 @@ def garo(state):
         sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 50
 
         sum += len(re.findall(r'[1][1]', panstr)) * 5
+        sum -= len(re.findall(r'[1][1][2]', panstr)) * 10
+        sum -= len(re.findall(r'[2][1][1]', panstr)) * 10
         sum -= len(re.findall(r'[1][2]', panstr)) * 1
         sum -= len(re.findall(r'[2][1]', panstr)) * 1
         sum -= len(re.findall(r'[2][2]', panstr)) * 1
@@ -64,6 +70,10 @@ def garo(state):
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) * 150000  # 백의 완전 승리 조건
+        sum -= len(re.findall(r'[2][2][2][2][2][0]', panstr)) * 100000
+        sum -= len(re.findall(r'[0][2][2][2][2][2]', panstr)) * 100000
+        sum -= len(re.findall(r'[2][2][2][2][2][1]', panstr)) * 100000
+        sum -= len(re.findall(r'[1][2][2][2][2][2]', panstr)) * 100000
 
         sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
         sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 100
@@ -85,7 +95,7 @@ def garo(state):
 def sero(state):        # 세로
     sum = 0
     pyeol = []
-    
+
     for j in range(0, 19):
         pyeol.clear()
         for i in range(0, 19):
@@ -98,6 +108,10 @@ def sero(state):        # 세로
         sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 300000
         sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 300000
         sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
+        sum += len(re.findall(r'[0][1][1][1][1][1]', panstr)) * 150000
+        sum += len(re.findall(r'[1][1][1][1][1][0]', panstr)) * 150000
+        sum += len(re.findall(r'[2][1][1][1][1][1]', panstr)) * 150000
+        sum += len(re.findall(r'[1][1][1][1][1][2]', panstr)) * 150000
 
         sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
         sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
@@ -132,6 +146,8 @@ def sero(state):        # 세로
         sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 50
 
         sum += len(re.findall(r'[1][1]', panstr)) * 5
+        sum -= len(re.findall(r'[1][1][2]', panstr)) * 10
+        sum -= len(re.findall(r'[2][1][1]', panstr)) * 10
         sum -= len(re.findall(r'[1][2]', panstr)) * 1
         sum -= len(re.findall(r'[2][1]', panstr)) * 1
         sum -= len(re.findall(r'[2][2]', panstr)) * 1
@@ -140,6 +156,10 @@ def sero(state):        # 세로
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) * 150000  # 백의 완전 승리 조건
+        sum -= len(re.findall(r'[2][2][2][2][2][0]', panstr)) * 100000
+        sum -= len(re.findall(r'[0][2][2][2][2][2]', panstr)) * 100000
+        sum -= len(re.findall(r'[2][2][2][2][2][1]', panstr)) * 100000
+        sum -= len(re.findall(r'[1][2][2][2][2][2]', panstr)) * 100000
 
         sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
         sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 100
@@ -176,6 +196,10 @@ def daegack1(state):        # 좌하향
         sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 300000
         sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 300000
         sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
+        sum += len(re.findall(r'[0][1][1][1][1][1]', panstr)) * 150000
+        sum += len(re.findall(r'[1][1][1][1][1][0]', panstr)) * 150000
+        sum += len(re.findall(r'[2][1][1][1][1][1]', panstr)) * 150000
+        sum += len(re.findall(r'[1][1][1][1][1][2]', panstr)) * 150000
 
         sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
         sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
@@ -210,6 +234,8 @@ def daegack1(state):        # 좌하향
         sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 50
 
         sum += len(re.findall(r'[1][1]', panstr)) * 5
+        sum -= len(re.findall(r'[1][1][2]', panstr)) * 10
+        sum -= len(re.findall(r'[2][1][1]', panstr)) * 10
         sum -= len(re.findall(r'[1][2]', panstr)) * 1
         sum -= len(re.findall(r'[2][1]', panstr)) * 1
         sum -= len(re.findall(r'[2][2]', panstr)) * 1
@@ -218,6 +244,10 @@ def daegack1(state):        # 좌하향
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) * 150000  # 백의 완전 승리 조건
+        sum -= len(re.findall(r'[2][2][2][2][2][0]', panstr)) * 100000
+        sum -= len(re.findall(r'[0][2][2][2][2][2]', panstr)) * 100000
+        sum -= len(re.findall(r'[2][2][2][2][2][1]', panstr)) * 100000
+        sum -= len(re.findall(r'[1][2][2][2][2][2]', panstr)) * 100000
 
         sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
         sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 100
@@ -254,6 +284,10 @@ def daegack2(state):        # 우하향
         sum += len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) * 300000
         sum += len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) * 300000
         sum += len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) * 300000  # 완전 승리조건
+        sum += len(re.findall(r'[0][1][1][1][1][1]', panstr)) * 150000
+        sum += len(re.findall(r'[1][1][1][1][1][0]', panstr)) * 150000
+        sum += len(re.findall(r'[2][1][1][1][1][1]', panstr)) * 150000
+        sum += len(re.findall(r'[1][1][1][1][1][2]', panstr)) * 150000
 
         sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
         sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
@@ -288,6 +322,8 @@ def daegack2(state):        # 우하향
         sum -= len(re.findall(r'[1][0][1][1][2]', panstr)) * 50
 
         sum += len(re.findall(r'[1][1]', panstr)) * 5
+        sum -= len(re.findall(r'[1][1][2]', panstr)) * 10
+        sum -= len(re.findall(r'[2][1][1]', panstr)) * 10
         sum -= len(re.findall(r'[1][2]', panstr)) * 1
         sum -= len(re.findall(r'[2][1]', panstr)) * 1
         sum -= len(re.findall(r'[2][2]', panstr)) * 1
@@ -296,6 +332,10 @@ def daegack2(state):        # 우하향
         sum -= len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) * 150000
         sum -= len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) * 150000  # 백의 완전 승리 조건
+        sum -= len(re.findall(r'[2][2][2][2][2][0]', panstr)) * 100000
+        sum -= len(re.findall(r'[0][2][2][2][2][2]', panstr)) * 100000
+        sum -= len(re.findall(r'[2][2][2][2][2][1]', panstr)) * 100000
+        sum -= len(re.findall(r'[1][2][2][2][2][2]', panstr)) * 100000
 
         sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
         sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 100
@@ -318,17 +358,41 @@ def evaluationfunction(state):
     return garo(state) + sero(state) + daegack1(state) + daegack2(state)
 
 
-def endgame(state):         # 장목은 승리로 보지 않음
+def endgame(state):         # 장목은 승리로 보지 않음             벽을 안 봄.
     for i in range(0, 19):      # 가로
         phang = state[i]
         phang = list(map(str, phang))
-        panstr = (''.join(phang))
+        panstr = (''.join(phang))       # 한 행을 문자열 한 줄로 바꾼 상태
 
-        if len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) > 0 or len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) > 0\
-                or len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) > 0 or len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) > 0:
+        cntl1 = 0        # 벽에 붙은 경우
+        cntl2 = 0
+        cntr1 = 0
+        cntr2 = 0
+        if len(panstr) >= 5:
+            for o in range(0, 5):
+                if panstr[o] == '1':
+                    cntl1 += 1
+                if panstr[o] == '2':
+                    cntl2 += 1
+
+            for o in range(-5, 0):
+                if panstr[o] == '1':
+                    cntr1 += 1
+                if panstr[o] == '2':
+                    cntr2 += 1
+
+            if cntl1 == 5 and (panstr[5] == '2' or panstr[5] == '0'):
+                return 1
+            elif cntl2 == 5 and (panstr[5] == '1' or panstr[5] == '0'):
+                return 2
+            if cntr1 == 5 and (panstr[-6] == '2' or panstr[-6] == '0'):
+                return 1
+            elif cntr2 == 5 and (panstr[-6] == '1' or panstr[-6] == '0'):
+                return 2
+
+        if len(re.findall(r'[02][1][1][1][1][1][02]', panstr)) > 0:
             return 1
-        elif len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) > 0 or len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) > 0\
-                or len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) > 0 or len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) > 0:
+        elif len(re.findall(r'[01][2][2][2][2][2][01]', panstr)) > 0:
             return 2
 
     pyeol = []
@@ -340,11 +404,35 @@ def endgame(state):         # 장목은 승리로 보지 않음
         pyeol = list(map(str, pyeol))
         panstr = (''.join(pyeol))
 
-        if len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) > 0 or len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) > 0 \
-                or len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) > 0 or len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) > 0:
+        cntl1 = 0  # 벽에 붙은 경우
+        cntl2 = 0
+        cntr1 = 0
+        cntr2 = 0
+        if len(panstr) >= 5:
+            for o in range(0, 5):
+                if panstr[o] == '1':
+                    cntl1 += 1
+                if panstr[o] == '2':
+                    cntl2 += 1
+
+            for o in range(-5, 0):
+                if panstr[o] == '1':
+                    cntr1 += 1
+                if panstr[o] == '2':
+                    cntr2 += 1
+
+            if cntl1 == 5 and (panstr[5] == '2' or panstr[5] == '0'):
+                return 1
+            elif cntl2 == 5 and (panstr[5] == '1' or panstr[5] == '0'):
+                return 2
+            if cntr1 == 5 and (panstr[-6] == '2' or panstr[-6] == '0'):
+                return 1
+            elif cntr2 == 5 and (panstr[-6] == '1' or panstr[-6] == '0'):
+                return 2
+
+        if len(re.findall(r'[02][1][1][1][1][1][02]', panstr)) > 0:
             return 1
-        elif len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) > 0 or len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) > 0 \
-                or len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) > 0 or len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) > 0:
+        elif len(re.findall(r'[01][2][2][2][2][2][01]', panstr)) > 0:
             return 2
 
     pdaegack1 = []
@@ -358,11 +446,35 @@ def endgame(state):         # 장목은 승리로 보지 않음
         pdaegack1 = list(map(str, pdaegack1))
         panstr = (''.join(pdaegack1))
 
-        if len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) > 0 or len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) > 0 \
-                or len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) > 0 or len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) > 0:
+        cntl1 = 0  # 벽에 붙은 경우
+        cntl2 = 0
+        cntr1 = 0
+        cntr2 = 0
+        if len(panstr) >= 5:
+            for o in range(0, 5):
+                if panstr[o] == '1':
+                    cntl1 += 1
+                if panstr[o] == '2':
+                    cntl2 += 1
+
+            for o in range(-5, 0):
+                if panstr[o] == '1':
+                    cntr1 += 1
+                if panstr[o] == '2':
+                    cntr2 += 1
+
+            if cntl1 == 5 and (panstr[5] == '2' or panstr[5] == '0'):
+                return 1
+            elif cntl2 == 5 and (panstr[5] == '1' or panstr[5] == '0'):
+                return 2
+            if cntr1 == 5 and (panstr[-6] == '2' or panstr[-6] == '0'):
+                return 1
+            elif cntr2 == 5 and (panstr[-6] == '1' or panstr[-6] == '0'):
+                return 2
+
+        if len(re.findall(r'[02][1][1][1][1][1][02]', panstr)) > 0:
             return 1
-        elif len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) > 0 or len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) > 0 \
-                or len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) > 0 or len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) > 0:
+        elif len(re.findall(r'[01][2][2][2][2][2][01]', panstr)) > 0:
             return 2
 
     pdaegack2 = []
@@ -376,11 +488,35 @@ def endgame(state):         # 장목은 승리로 보지 않음
         pdaegack2 = list(map(str, pdaegack2))
         panstr = (''.join(pdaegack2))
 
-        if len(re.findall(r'[0][1][1][1][1][1][0]', panstr)) > 0 or len(re.findall(r'[0][1][1][1][1][1][2]', panstr)) > 0 \
-                or len(re.findall(r'[2][1][1][1][1][1][0]', panstr)) > 0 or len(re.findall(r'[2][1][1][1][1][1][2]', panstr)) > 0:
+        cntl1 = 0  # 벽에 붙은 경우
+        cntl2 = 0
+        cntr1 = 0
+        cntr2 = 0
+        if len(panstr) >= 5:
+            for o in range(0, 5):
+                if panstr[o] == '1':
+                    cntl1 += 1
+                if panstr[o] == '2':
+                    cntl2 += 1
+
+            for o in range(-5, 0):
+                if panstr[o] == '1':
+                    cntr1 += 1
+                if panstr[o] == '2':
+                    cntr2 += 1
+
+            if cntl1 == 5 and (panstr[5] == '2' or panstr[5] == '0'):
+                return 1
+            elif cntl2 == 5 and (panstr[5] == '1' or panstr[5] == '0'):
+                return 2
+            if cntr1 == 5 and (panstr[-6] == '2' or panstr[-6] == '0'):
+                return 1
+            elif cntr2 == 5 and (panstr[-6] == '1' or panstr[-6] == '0'):
+                return 2
+
+        if len(re.findall(r'[02][1][1][1][1][1][02]', panstr)) > 0:
             return 1
-        elif len(re.findall(r'[0][2][2][2][2][2][0]', panstr)) > 0 or len(re.findall(r'[0][2][2][2][2][2][1]', panstr)) > 0 \
-                or len(re.findall(r'[1][2][2][2][2][2][0]', panstr)) > 0 or len(re.findall(r'[1][2][2][2][2][2][1]', panstr)) > 0:
+        elif len(re.findall(r'[01][2][2][2][2][2][01]', panstr)) > 0:
             return 2
 
     return 0
@@ -392,7 +528,7 @@ def maxvalue(state, a, b, depth, end, out):
         return k, 100, 100
 
     ran = setrange(listouter)
-    print(ran[0], ran[1], ran[2], ran[3])
+
     v = -sys.maxsize-1
     for i in range(ran[0], ran[1]):
         for j in range(ran[2], ran[3]):
@@ -439,18 +575,17 @@ def minvalue(state, a, b, depth, end, out):       # min
 
 
 def alphabeta(state, player, t):  # player: AI가 max player인지 min player 인지
-    depth = 2     # iterative 하게 수정해야함
+
     if player == 1:  # 사용자가 흑, AI가 백 / 즉 AI가 min player
         start = time.time()
         end = start + t
         for i in range(1, 19*19):  # 여기도 수정!!!!   >> 시간 제한
-            #print(i)
             v = minvalue(state, -sys.maxsize-1, sys.maxsize, i, end, t)
             if end - time.time() <= 3.5:
                 break
 
-        print(int(time.time()-start))
-        print(v[1], v[2])
+        #print(int(time.time()-start))
+        #print(v[1], v[2])
         return v[1], v[2]
 
     if player == 2:  # 사용자가 백, AI가 흑 / 즉 AI가 max player
@@ -847,7 +982,6 @@ def samsamfunction(state, i, j, player):        # x하고 y는 각각 행, 열  
             state[i][j] = 0     # 원래대로
 
         if sam >= 2:
-            #state[i][j] = 3
             return 33
     return 0
 
@@ -894,6 +1028,7 @@ def playerturn(pan, c, t):  # 사용자 차례
                 print('이미 돌이 있는 곳입니다.')
         except:
             print("바르게 입력해주세요")
+
 
 def setrange(listouter):
     if listouter[0] - 5 <= 0:
@@ -958,7 +1093,6 @@ if c == 1:  # 사용자가 흑, AI가 백
             listouter[2] = y
         if y > listouter[3]:
             listouter[3] = y
-        print(listouter)
 
     if endgame(pan) == 2:
         print("백의 승리")
