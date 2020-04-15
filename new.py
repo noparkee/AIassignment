@@ -358,7 +358,7 @@ def evaluationfunction(state):
     return garo(state) + sero(state) + daegack1(state) + daegack2(state)
 
 
-def endgame(state):         # 장목은 승리로 보지 않음             벽을 안 봄.
+def endgame(state):         # 장목은 승리로 보지 않음
     for i in range(0, 19):      # 가로
         phang = state[i]
         phang = list(map(str, phang))
@@ -536,7 +536,7 @@ def maxvalue(state, a, b, depth, end, out):
                 state[i][j] = 1    # 현재 state에서 할 수 있는 action을 취한 결과 state (result)
 
                 minv = minvalue(state, a, b, depth - 1, end, out)
-                if v <= minv[0]:
+                if v < minv[0]:
                     v = minv[0]
                     x = i
                     y = j
@@ -558,11 +558,11 @@ def minvalue(state, a, b, depth, end, out):       # min
     v = sys.maxsize
     for i in range(ran[0], ran[1]):
         for j in range(ran[2], ran[3]):
-            if state[i][j] == 0 and samsamfunction(state, i, j, 2) != 33:           #삼삼 이렇게 넣어도 되는지도 더 고민해보자
+            if state[i][j] == 0 and samsamfunction(state, i, j, 2) != 33:
                 state[i][j] = 2     # (i, j)에 바둑돌을 올리는 action
 
                 maxv = maxvalue(state, a, b, depth - 1, end, out)
-                if v >= maxv[0]:
+                if v > maxv[0]:
                     v = maxv[0]
                     x = i
                     y = j
@@ -579,7 +579,7 @@ def alphabeta(state, player, t):  # player: AI가 max player인지 min player �
     if player == 1:  # 사용자가 흑, AI가 백 / 즉 AI가 min player
         start = time.time()
         end = start + t
-        for i in range(1, 19*19):  # 여기도 수정!!!!   >> 시간 제한
+        for i in range(1, 19*19):
             v = minvalue(state, -sys.maxsize-1, sys.maxsize, i, end, t)
             if end - time.time() <= 3.5:
                 break
@@ -608,7 +608,7 @@ def samsamfunction(state, i, j, player):        # x하고 y는 각각 행, 열  
 
     if state[i][j] == 0:
         state[i][j] = c
-        # 이제 여기는 -0-00- / -00-0- 이런 꼴 넣어야하는데
+        # 이제 여기는 -0-00- / -00-0-
         if i - 1 >= 0 and i + 4 <= 18 and state[i - 1][j] == 0 and state[i][j] == c and state[i + 1][j] == 0 and state[i + 2][j] == c and \
                 state[i + 3][j] == c and state[i + 4][j] == 0:
             sam += 1
@@ -1064,10 +1064,16 @@ for i in range(0, 19):  # 오목판 초기화. 비어있는 상태
     pan.append(hang)  # 전체 리스트에 안쪽 리스트를 추가
 
 c = int(input("1. 흑돌\n2. 백돌\n>> "))
-t = int(input("제한 시간을 입력해주세요. 4초 이상으로 입력해주세요.\n>> "))
+
+while True:
+    try:
+        t = int(input("제한 시간을 입력해주세요. 4초 이상으로 입력해주세요.\n>> "))
+        break
+    except:
+        print("바르게 입력해주세요")
 
 print("--- Game Start !!! ---")
-# 여기 나중에 try - except
+
 if c == 1:  # 사용자가 흑, AI가 백
     while True:
         playerturn(pan, c, t)       # 사용자가 두기
