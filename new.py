@@ -993,11 +993,11 @@ def playerturn(pan, c, t):  # 사용자 차례
             start = time.time()
             end = start + t
             p = str(input(">> "))
-            '''if time.time() > end:
+            if time.time() > end:
                 p = "시간이 지났습니다. 상대에게 순서가 넘어갑니다."
                 print(p)
                 break
-'''
+
             x = int(p.split(' ')[0])
             y = int(p.split(' ')[1])
             if pan[x][y] == 0 and samsamfunction(pan, x, y, c) != 33:
@@ -1121,6 +1121,7 @@ if c == 2:  # 사용자가 백, AI가 흑
 
         state = copy.deepcopy(pan)
         x, y = alphabeta(state, c, t)
+        print("(%d, %d)" % (x, y))
         pan[x][y] = 1
         pprint(pan)
 
