@@ -27,10 +27,10 @@ def garo(state):
         sum += len(re.findall(r'[2][1][1][1][1][1]', panstr)) * 150000
         sum += len(re.findall(r'[1][1][1][1][1][2]', panstr)) * 150000
 
-        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
-        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 300
-        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1][1][0]', panstr)) * 200000
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 300
         sum += len(re.findall(r'[1][1][1][0][1]', panstr)) * 1000
         sum += len(re.findall(r'[1][1][0][1][1]', panstr)) * 1000
         sum += len(re.findall(r'[1][0][1][1][1]', panstr)) * 1000
@@ -113,10 +113,10 @@ def sero(state):        # 세로
         sum += len(re.findall(r'[2][1][1][1][1][1]', panstr)) * 150000
         sum += len(re.findall(r'[1][1][1][1][1][2]', panstr)) * 150000
 
-        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
-        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 300
-        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1][1][0]', panstr)) * 200000
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 300
         sum += len(re.findall(r'[1][1][1][0][1]', panstr)) * 1000
         sum += len(re.findall(r'[1][1][0][1][1]', panstr)) * 1000
         sum += len(re.findall(r'[1][0][1][1][1]', panstr)) * 1000
@@ -201,10 +201,10 @@ def daegack1(state):        # 좌하향
         sum += len(re.findall(r'[2][1][1][1][1][1]', panstr)) * 150000
         sum += len(re.findall(r'[1][1][1][1][1][2]', panstr)) * 150000
 
-        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
-        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 300
-        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1][1][0]', panstr)) * 200000
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 300
         sum += len(re.findall(r'[1][1][1][0][1]', panstr)) * 1000
         sum += len(re.findall(r'[1][1][0][1][1]', panstr)) * 1000
         sum += len(re.findall(r'[1][0][1][1][1]', panstr)) * 1000
@@ -289,10 +289,10 @@ def daegack2(state):        # 우하향
         sum += len(re.findall(r'[2][1][1][1][1][1]', panstr)) * 150000
         sum += len(re.findall(r'[1][1][1][1][1][2]', panstr)) * 150000
 
-        sum += len(re.findall(r'[0][1][1][1][1][0]]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 300
-        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 300
-        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 500
+        sum += len(re.findall(r'[0][1][1][1][1][0]', panstr)) * 200000
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[1][1][1][1]', panstr)) * 300
         sum += len(re.findall(r'[1][1][1][0][1]', panstr)) * 1000
         sum += len(re.findall(r'[1][1][0][1][1]', panstr)) * 1000
         sum += len(re.findall(r'[1][0][1][1][1]', panstr)) * 1000
@@ -530,6 +530,7 @@ def maxvalue(state, a, b, depth, end, out):
     ran = setrange(listouter)
 
     v = -sys.maxsize-1
+
     for i in range(ran[0], ran[1]):
         for j in range(ran[2], ran[3]):
             if state[i][j] == 0 and samsamfunction(state, i, j, 1) != 33:
@@ -992,11 +993,11 @@ def playerturn(pan, c, t):  # 사용자 차례
             start = time.time()
             end = start + t
             p = str(input(">> "))
-            if time.time() > end:
+            '''if time.time() > end:
                 p = "시간이 지났습니다. 상대에게 순서가 넘어갑니다."
                 print(p)
                 break
-
+'''
             x = int(p.split(' ')[0])
             y = int(p.split(' ')[1])
             if pan[x][y] == 0 and samsamfunction(pan, x, y, c) != 33:
