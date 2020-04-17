@@ -1079,17 +1079,19 @@ for i in range(0, 19):  # 오목판 초기화. 비어있는 상태
     pan.append(hang)  # 전체 리스트에 안쪽 리스트를 추가
 
 c = int(input("1. 흑돌\n2. 백돌\n>> "))
-t = int(input("제한 시간을 입력해주세요. 4초 이상으로 입력해주세요.\n>> "))
-
+if c != 1 and c != 2:
+    print('바르게 입력해주세요')
+    exit()
+try:
+    t = int(input("제한 시간을 입력해주세요. 4초 이상으로 입력해주세요.\n>> "))
+except:
+    print('바르게 입력해주세요')
+    exit()
 print("--- Game Start !!! ---")
 # 여기 나중에 try - except
 if c == 1:  # 사용자가 흑, AI가 백
     while True:
-        k = playerturn(pan, c, t)       # 사용자가 두기
-        if k == c:
-            print('백의 승리')
-            break
-
+        playerturn(pan, c, t)       # 사용자가 두기
         pprint(pan)
 
         if endgame(pan) != 0:
@@ -1124,11 +1126,8 @@ if c == 2:  # 사용자가 백, AI가 흑
     pprint(pan)
 
     while True:
-        k = playerturn(pan, c, t)  # 사용자가 두기
-        if k == c:
-            print('흑의 승리')
-            break
-            
+        state = copy.deepcopy(pan)
+        playerturn(pan, c, t)
         pprint(pan)
 
         if endgame(pan) != 0:
@@ -1155,4 +1154,3 @@ if c == 2:  # 사용자가 백, AI가 흑
         print("백의 승리")
     elif endgame(pan) == 1:
         print("흑의 승리")
-
