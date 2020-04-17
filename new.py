@@ -28,8 +28,8 @@ def garo(state):
         sum += len(re.findall(r'[1][1][1][1][1][2]', panstr)) * 150000
 
         sum += len(re.findall(r'[0][1][1][1][1][0]', panstr)) * 200000
-        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 700
-        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 700
+        sum += len(re.findall(r'[0][1][1][1][1]', panstr)) * 1000
+        sum += len(re.findall(r'[1][1][1][1][0]', panstr)) * 1000
         sum += len(re.findall(r'[1][1][1][1]', panstr)) * 300
         sum += len(re.findall(r'[1][1][1][0][1]', panstr)) * 1000
         sum += len(re.findall(r'[1][1][0][1][1]', panstr)) * 1000
@@ -75,19 +75,23 @@ def garo(state):
         sum -= len(re.findall(r'[2][2][2][2][2][1]', panstr)) * 100000
         sum -= len(re.findall(r'[1][2][2][2][2][2]', panstr)) * 100000
 
-        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
-        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 1500  # 흑의 수비 & 백의 공격
+        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
         sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 100
         sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 100
         sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 50
-        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 50
-        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 50
-        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 50
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[0][2][2][2][0]', panstr)) * 1000
+        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 300
+        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 500
+        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 500
+        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 500
 
     return sum
 
@@ -161,19 +165,23 @@ def sero(state):        # 세로
         sum -= len(re.findall(r'[2][2][2][2][2][1]', panstr)) * 100000
         sum -= len(re.findall(r'[1][2][2][2][2][2]', panstr)) * 100000
 
-        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
-        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 1500  # 흑의 수비 & 백의 공격
+        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
         sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 100
         sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 100
         sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 50
-        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 50
-        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 50
-        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 50
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[0][2][2][2][0]', panstr)) * 1000
+        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 300
+        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 500
+        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 500
+        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 500
 
     return sum
 
@@ -249,19 +257,23 @@ def daegack1(state):        # 좌하향
         sum -= len(re.findall(r'[2][2][2][2][2][1]', panstr)) * 100000
         sum -= len(re.findall(r'[1][2][2][2][2][2]', panstr)) * 100000
 
-        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
-        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 1500  # 흑의 수비 & 백의 공격
+        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
         sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 100
         sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 100
         sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 50
-        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 50
-        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 50
-        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 50
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[0][2][2][2][0]', panstr)) * 1000
+        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 300
+        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 500
+        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 500
+        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 500
 
     return sum
 
@@ -337,20 +349,23 @@ def daegack2(state):        # 우하향
         sum -= len(re.findall(r'[2][2][2][2][2][1]', panstr)) * 100000
         sum -= len(re.findall(r'[1][2][2][2][2][2]', panstr)) * 100000
 
-        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 100000  # 흑의 수비 & 백의 공격
-        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 100
+        sum -= len(re.findall(r'[0][2][2][2][2][0]', panstr)) * 1500  # 흑의 수비 & 백의 공격
+        sum -= len(re.findall(r'[2][2][2][2]', panstr)) * 500
         sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 100
         sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 100
         sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 100
-        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 100
-        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 50
-        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 50
-        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 50
-        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 50
-
+        sum -= len(re.findall(r'[0][2][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[0][2][2][2][0]', panstr)) * 1000
+        sum -= len(re.findall(r'[0][2][2][0][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][0][2][2][0]', panstr)) * 500
+        sum -= len(re.findall(r'[0][2][2][0][2]', panstr)) * 300
+        sum -= len(re.findall(r'[0][2][0][2][2]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][0][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[2][0][2][2][0]', panstr)) * 300
+        sum -= len(re.findall(r'[2][2][2][0][2]', panstr)) * 500
+        sum -= len(re.findall(r'[2][2][0][2][2]', panstr)) * 500
+        sum -= len(re.findall(r'[2][0][2][2][2]', panstr)) * 500
     return sum
 
 
@@ -523,18 +538,17 @@ def endgame(state):         # 장목은 승리로 보지 않음
 
 
 def maxvalue(state, a, b, depth, end, out):
-    if depth == 0 or endgame(state) != 0 or end - time.time() <= 3.5:       # terminal state or cut off
+    if depth == 0 or endgame(state) != 0 or end - time.time() <= 3.5:  # terminal state or cut off
         k = evaluationfunction(state)
         return k, 100, 100
 
     ran = setrange(listouter)
 
-    v = -sys.maxsize-1
-
+    v = -sys.maxsize - 1
     for i in range(ran[0], ran[1]):
         for j in range(ran[2], ran[3]):
             if state[i][j] == 0 and samsamfunction(state, i, j, 1) != 33:
-                state[i][j] = 1    # 현재 state에서 할 수 있는 action을 취한 결과 state (result)
+                state[i][j] = 1  # 현재 state에서 할 수 있는 action을 취한 결과 state (result)
 
                 minv = minvalue(state, a, b, depth - 1, end, out)
                 if v < minv[0]:
@@ -575,6 +589,7 @@ def minvalue(state, a, b, depth, end, out):       # min
     return v, x, y
 
 
+
 def alphabeta(state, player, t):  # player: AI가 max player인지 min player 인지
 
     if player == 1:  # 사용자가 흑, AI가 백 / 즉 AI가 min player
@@ -584,9 +599,6 @@ def alphabeta(state, player, t):  # player: AI가 max player인지 min player �
             v = minvalue(state, -sys.maxsize-1, sys.maxsize, i, end, t)
             if end - time.time() <= 3.5:
                 break
-
-        #print(int(time.time()-start))
-        #print(v[1], v[2])
         return v[1], v[2]
 
     if player == 2:  # 사용자가 백, AI가 흑 / 즉 AI가 max player
@@ -596,7 +608,6 @@ def alphabeta(state, player, t):  # player: AI가 max player인지 min player �
             v = maxvalue(state, -sys.maxsize-1, sys.maxsize, i, start+t, t)
             if end - time.time() <= 3.5:
                 break
-
         return v[1], v[2]
 
 
@@ -994,8 +1005,9 @@ def playerturn(pan, c, t):  # 사용자 차례
             end = start + t
             p = str(input(">> "))
             if time.time() > end:
-                p = "시간이 지났습니다. 상대에게 순서가 넘어갑니다."
+                p = "시간이 지났습니다"
                 print(p)
+                return c
                 break
 
             x = int(p.split(' ')[0])
@@ -1011,6 +1023,7 @@ def playerturn(pan, c, t):  # 사용자 차례
                         listouter[2] = y
                     if y > listouter[3]:
                         listouter[3] = y
+                    return 0
                     break
                 elif c == 2:
                     pan[x][y] = 2
@@ -1022,6 +1035,7 @@ def playerturn(pan, c, t):  # 사용자 차례
                         listouter[2] = y
                     if y > listouter[3]:
                         listouter[3] = y
+                    return 0
                     break
             elif samsamfunction(pan, x, y, c) == 33:
                 print('금수 위치입니다.')
@@ -1065,19 +1079,17 @@ for i in range(0, 19):  # 오목판 초기화. 비어있는 상태
     pan.append(hang)  # 전체 리스트에 안쪽 리스트를 추가
 
 c = int(input("1. 흑돌\n2. 백돌\n>> "))
-
-while True:
-    try:
-        t = int(input("제한 시간을 입력해주세요. 4초 이상으로 입력해주세요.\n>> "))
-        break
-    except:
-        print("바르게 입력해주세요")
+t = int(input("제한 시간을 입력해주세요. 4초 이상으로 입력해주세요.\n>> "))
 
 print("--- Game Start !!! ---")
-
+# 여기 나중에 try - except
 if c == 1:  # 사용자가 흑, AI가 백
     while True:
-        playerturn(pan, c, t)       # 사용자가 두기
+        k = playerturn(pan, c, t)       # 사용자가 두기
+        if k == c:
+            print('백의 승리')
+            break
+
         pprint(pan)
 
         if endgame(pan) != 0:
@@ -1112,8 +1124,11 @@ if c == 2:  # 사용자가 백, AI가 흑
     pprint(pan)
 
     while True:
-        state = copy.deepcopy(pan)
-        playerturn(pan, c, t)
+        k = playerturn(pan, c, t)  # 사용자가 두기
+        if k == c:
+            print('흑의 승리')
+            break
+            
         pprint(pan)
 
         if endgame(pan) != 0:
@@ -1121,7 +1136,6 @@ if c == 2:  # 사용자가 백, AI가 흑
 
         state = copy.deepcopy(pan)
         x, y = alphabeta(state, c, t)
-        print("(%d, %d)" % (x, y))
         pan[x][y] = 1
         pprint(pan)
 
@@ -1141,3 +1155,4 @@ if c == 2:  # 사용자가 백, AI가 흑
         print("백의 승리")
     elif endgame(pan) == 1:
         print("흑의 승리")
+
